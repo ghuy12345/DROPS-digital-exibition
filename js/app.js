@@ -204,7 +204,7 @@
         '<section><h4>Exhibition Design and Curation</h4><p>Mariam Safi, Rina Amiri, Meha Desai</p></section>'+
         '<section><h4>Exhibition production</h4><p>It’s Handled by H</p></section>'+
         '<section><h4>Digital Experience</h4><p>Seba Agency</p></section>'+
-        '<section><h4>Design of Where Justice Lives book</h4><p>OHSOBOHO</p></section>'+
+        '<section><h4>Design of Where Justice Lives book</h4><p>Ratna Desai</p></section>'+
         '<section><h4>Sound Design</h4><p>Designers of Record</p></section>'+
         '<section><h4>Photography</h4><p>Mariam Alimi<br>Meha Desai<br>Kiana Hayeri / Fondation Carmignac</p></section>'+
       '</div></div></section>';
