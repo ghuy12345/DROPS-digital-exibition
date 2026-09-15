@@ -211,8 +211,8 @@ button{font-family:inherit}
   color:var(--paper-faint);line-height:1.7}
 .byline b{color:var(--paper-dim);font-weight:700}
 
-/* one hundred edicts, one square per edict */
-.grid100{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;max-width:230px;
+/* hanging strips, one square per measure */
+.grid100{display:grid;grid-template-columns:repeat(15,1fr);gap:4px;max-width:270px;
   margin:18px 0 1.1em}
 .grid100 i{display:block;aspect-ratio:1;background:var(--crimson);opacity:.82}
 .grid100 i:nth-child(3n){opacity:.6}

@@ -4,7 +4,7 @@
     return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 
   /* ------------------------------------------------------------
-     Deck A, the guide. Every line below is from the exhibition
+     Deck A, the guide. Every line below is from the final exhibition
      copy document; nothing is added, summarised or invented.
      ------------------------------------------------------------ */
   /* Drop the photographs into images/guide/ using exactly these filenames and
@@ -12,49 +12,69 @@
      placeholder naming the file it wants, so nothing breaks while the picture
      research is still open. */
   var GUIDE = [
-    {short:"Introduction", loc:"", title:"Introduction",
+    {short:"Introduction", loc:"", title:"Exhibition Guide",
      img:"images/guide/introduction.jpg",
-     body:["<em class='lead'>Where Justice Lives</em> begins with the People’s Tribunal for the Women of Afghanistan, a survivor-centred civil society process created in response to the systematic restrictions imposed on women and girls under Taliban rule.",
-            "Since returning to power in August 2021, the Taliban have introduced more than 100 decrees and directives affecting almost every part of women’s lives, including education, employment, movement, healthcare, dress and participation in public life. The Tribunal brought Afghan women’s testimony, expert evidence and legal analysis before an international panel of judges to examine these policies and their consequences.",
-            "In December 2025, the Tribunal concluded that the Taliban’s policies and practices constitute crimes against humanity, including gender persecution.",
-            "<em>Where Justice Lives</em> carries that public record beyond the courtroom through photographs, testimony, documents, sound and words from women inside Afghanistan. Together, these works place legal evidence alongside lived experience, asking what it means to witness, record and respond."]},
+     body:["<em class='lead'>Where Justice Lives</em> is an act of memory, defiance, and solidarity with the women and girls of Afghanistan.",
+            "It brings the record of the People’s Tribunal for the Women of Afghanistan into a public space of encounter: a place to listen, to look closely, and to remain with what has been witnessed.",
+            "Since returning to power in August 2021, the Taliban have imposed an increasingly systematic regime of restrictions on women and girls. More than 150 decrees and laws now reach into nearly every part of daily life: education, work, movement, healthcare, dress, voice, and public participation.",
+            "The People’s Tribunal has described these conditions as a crime against humanity—specifically, gender persecution under the Rome Statute.",
+            "<b>What does this mean?</b>",
+            "Gender persecution is the intentional and severe denial of fundamental rights because of a person’s gender. When girls are barred from education beyond Grade 6; when women cannot work, travel freely, access healthcare without a male guardian, or raise their voices in public—these are not isolated restrictions. They form a system of exclusion.",
+            "For Afghan women and girls, this system has shaped life for the past five years.",
+            "But this is not only a story of what has been taken away. It is also a story of what remains: women who testify, protest, organize, create, document, care for one another, and refuse to disappear.",
+            "Through art, images, sound, documents, research, and the words of women inside Afghanistan, <em>Where Justice Lives</em> carries the Tribunal’s record beyond the hearing room. It places legal evidence beside lived experience, and memory beside action.",
+            "The exhibition asks us not only to see the scale of this injustice, but to consider what it means to witness it—and what responsibility witnessing carries.",
+            "<pull>The suffering and success of women in every corner of the world concerns us all. Solidarity knows no borders.”"],
+     by:"— An activist living Afghanistan"},
 
-    {short:"The Artwork", loc:"", title:"Artwork by Leeda Totakhail",
-     slot:"Image of book cover", img:"images/guide/artwork.jpg",
-     body:["The artwork draws on contemporary Islamic art, combining Arabic calligraphy, traditional motifs and modern visual storytelling. It depicts the struggle of Afghan women for justice and freedom.",
-            "Leeda Totakhail is an Afghan artist."],
-     notes:{1:true}},
+    {short:"The Struggle in Six Words", loc:"", title:"The Struggle in Six Words",
+     img:"images/guide/six-words.jpg",
+     body:["The book “Where Justice Lives” holds moments from the People’s Tribunal for the Women of Afghanistan: grief, courage, testimony, and the difficult work of healing.",
+            "Its images remind us that accountability is not only a legal process. It is also a public and human one. The Tribunal established a vital evidentiary and legal record, but its force depends on what follows the judgment: how its findings travel, resonate, and shape public conversation, policy, and collective action.",
+            "<em>The book</em> carries this record through the accordion book beyond the courtroom and into shared public space — inviting visitors to encounter each image, and through it, the continuing questions of justice, gender persecution, and accountability.",
+            "The cover of the book is a painting by Leeda Totakhail using contemporary Islamic art that blends Arabic calligraphy, traditional motifs, and modern visual storytelling to evoke Afghan women’s struggle for justice, freedom, equality, women’s rights, bodily autonomy, and the right to work.",
+            "Taken from the Tribunal’s judgment, these six words are woven into the calligraphy — transforming its language of accountability into a visual call for women’s enduring resistance."],
+     by:"Cover by <b>Leeda Totakhail</b>, an artist in Afghanistan · Photographs by <b>Meha Desai</b>"},
 
-    {short:"Women’s Lives", loc:"Main Gallery, left and right walls",
-     title:"Women’s Lives Across Afghanistan’s Changing Landscape",
-     img:"images/guide/womens-lives.jpg",
-     body:["Two bodies of photographs place the Tribunal within the wider lives and histories it was convened to address. On one wall, photographs made under Taliban rule document the profound restrictions imposed on women and girls since the Taliban returned to power in August 2021. Opposite them, photographs from the years before the Taliban’s return show women inhabiting public, professional, educational and everyday life during a very different period in Afghanistan’s recent history. Together, the photographs are not a simple before and after. They hold two periods of Afghan life alongside one another, giving context to what has been restricted, erased and fought for."],
-     by:"Photographs by <b>Kiana Hayeri</b> and <b>Mariam Alimi</b>"},
+    {short:"Erasure Rendered Visible", loc:"Main Gallery, left and right walls",
+     title:"Erasure Rendered Visible",
+     img:"images/guide/erasure-rendered-visible.jpg",
+     body:["Two bodies of photographs place the gender persecution of Afghan women and girls in historical context.",
+            "Five photographs by Mariam Alimi recall the years of Afghanistan’s democratic period, from 2001 to 2021, when women and girls inhabited public, professional, educational, and everyday life with greater freedom. Across from them, four photographs by Kiana Hayeri document life under Taliban rule since their return to power in 2021, revealing the profound restrictions now imposed on women and girls.",
+            "Together, these images are not simple before-and-afters. They hold two realities side by side: what was possible, what has been taken away, and what Afghan women are fighting for under the Taliban."],
+     by:"Photographs by <b>Mariam Alimi</b> and <b>Kiana Hayeri</b>."},
 
-    {short:"The Work of Witness", loc:"Main Gallery, centre", title:"The Work of Witness",
-     img:"images/guide/work-of-witness.jpg",
-     body:["Made during the public hearings of the People’s Tribunal for the Women of Afghanistan in Madrid in October 2025 and the delivery of its judgment in The Hague that December, these photographs move inside and beyond the hearing room.",
-            "They follow not only the proceedings, but the work that makes justice possible: registering testimony, preparing, translating, listening, recording, waiting and witnessing.",
-            "Together, they trace how testimony becomes evidence, evidence becomes record, and record becomes a public demand for justice."],
+    {short:"The Power in Bearing Witness", loc:"Main Gallery, centre", title:"The Power in Bearing Witness",
+     img:"images/guide/bearing-witness.jpg",
+     body:["This photographic scroll traces the public hearings of the People’s Tribunal for the Women of Afghanistan, held in Madrid in October 2025, and the delivery of its final judgment in The Hague that December. The Tribunal affirmed what Afghan human-rights defenders had long made clear: that the Taliban’s crimes against women and girls constitute gender persecution under the Rome Statute.",
+            "These images follow more than the proceedings. They reveal the work that makes justice possible: gathering testimony, documenting evidence, and creating space for truth, recognition, and healing.",
+            "Together, they show how Afghan civil society through strength, determination, and collective labor brought the experiences of women and girls before an international tribunal. They trace a process in which testimony becomes evidence, evidence becomes a record, and that record becomes a public demand for justice.",
+            "The Tribunal’s judgment now stands as a powerful resource for Afghan civil society to strengthen its advocacy and sustain the call for accountability."],
      by:"Photographs by <b>Meha Desai</b>"},
 
-    {short:"Messages from Inside", loc:"Graffiti Room",
-     title:"Messages from Inside Afghanistan",
-     img:"images/guide/messages.jpg",
-     body:["These 48 messages come directly from women living across Afghanistan. They are messages from Afghan women to women human rights defenders, activists and feminists around the world, telling them what they most need to hear about their situation.",
-            "They speak from within a system of gender persecution that is restricting women’s rights, freedoms and place in public life. The messages make clear that Afghan women continue to resist, organise and speak out, but that they cannot carry this struggle alone. They are also a call for solidarity: to listen, to stay engaged, and to stand alongside Afghan women in defending their rights and freedoms."]},
+    {short:"In Their Own Words", loc:"Main Gallery",
+     title:"In Their Own Words: Messages from Afghanistan",
+     img:"images/guide/in-their-own-words.jpg",
+     body:["Placed among the photographs, nine messages from women across Afghanistan speak directly to the world.",
+            "They emerge from within a system of gender persecution that reaches into every part of life: the right to learn, to work and earn an income, to move freely without a male guardian, to speak in public, and to take part in decisions that shape their country.",
+            "But these voices are not only records of what has been taken away. They are acts of resistance. Afghan women continue to organize, speak out, and insist on their place in public life despite every effort to erase them.",
+            "Their message is also a call for solidarity. They ask the world not to look away, but to listen, remain engaged, and stand with Afghan women as they reclaim their rights, freedoms, and dignity."]},
 
-    {short:"A Space for Response", loc:"Graffiti Room", title:"A Space for Response",
-     img:"images/guide/response.jpg",
-     body:["Please take a moment to read, reflect and respond to what you have encountered. We invite you to write in the guest book before you leave, whether with a thought, a question, a reflection or a message of solidarity."]},
+    {short:"Entering the Conversation", loc:"Graffiti Room", title:"Entering the Conversation",
+     img:"images/guide/entering-the-conversation.jpg",
+     body:["Before you leave, we invite you to pause.",
+            "What did you see? What did you feel? What will you carry with you from <em>Where Justice Lives</em>?",
+            "Write a thought, a question, or a reflection. We invite you to leave a message of solidarity for the women and girls of Afghanistan. Make a commitment to listen, to speak, to support their movement or share an idea for how we might widen the space in which justice lives."]},
 
-    {short:"100 Edicts / Sounds", loc:"Basement", title:"100 Edicts / Sounds from Kabul",
-     img:"images/guide/edicts-sounds.jpg",
+    {short:"Echoes of Erasure", loc:"Basement", title:"Echoes of Erasure",
+     img:"images/guide/echoes-of-erasure.jpg",
      audio:"audio/sounds-from-kabul.mp3",
-     body:["One hundred decrees, directives and laws issued by the Taliban restricting the rights and freedoms of women and girls are presented as a cumulative record of the system imposed since August 2021. Together, they reach into almost every sphere of life, restricting access to education and employment, freedom of movement, public space, healthcare, dress, and participation in public and political life. Read as a body, they reveal not a series of isolated prohibitions, but an interlocking system of exclusion.",
-            "Running through this installation is a sound work composed from recordings made on the streets of Kabul in July 2026. The sound of everyday public life, traffic, movement, commerce and conversation, sits alongside the written restrictions. But within this public soundscape, women are almost entirely absent. Across the recording, a woman’s voice is heard only once.",
-            "Together, the edicts and sound make visible and audible how exclusion moves from written policy into everyday life."],
-     after:{0:"edicts", 1:"player"},
+     body:["Under Taliban laws, women are no longer equal to men. Girls are barred from education beyond Grade 6. Child marriage is allowed. And, domestic abuse is permissible.",
+            "Since August 2021, the Taliban have issued more than 150 decrees, policies, and laws reaching into every part of women’s lives — public and private.",
+            "Each hanging strip in this installation carries one of these measures. Read together, they form a cumulative record of gender persecution: not a series of separate prohibitions, but an interlocking system of subordination, control, and exclusion.",
+            "Alongside the installation is a soundscape built from recordings made by DROPS on the streets of Kabul in July 2026. It holds the rhythms of public life: traffic, footsteps, commerce, movement, conversation. But listen closely. Across the recording, a woman’s voice is heard only once!",
+            "Together, the suspended laws and the sound of the street make oppression both visible and audible — showing how exclusion moves from the written word into everyday life."],
+     after:{2:"edicts", 3:"player"},
      by:"Field recordings: <b>DROPS Country Team</b> · Sound design: <b>Designers of Record</b>"}
   ];
 
@@ -68,7 +88,7 @@
      by:"Kiana Hayeri"},
     {n:"02", place:"Jalalabad, Nangarhar, 12 February 2024",
      text:"Muska, 14, had recently returned from Pakistan, where she attended school. In Afghanistan, she could no longer continue her education. Facing severe economic hardship, her family accepted a marriage offer from their landlord’s son in exchange for a well and solar panels.",
-     quote:"I’d rather live in Pakistan, there I could at least pursue my education.", by:"Kiana Hayeri"},
+     quote:"I’d rather live in Pakistan, where I could at least pursue my education.", by:"Kiana Hayeri"},
     {n:"03", place:"Kabul, 17 February 2024",
      text:"At a private institute in western Kabul, around 700 teenage girls study an American curriculum in English. The school operates with local Taliban acquiescence, but students cannot receive an official Afghan education certificate or continue to university. Girls remain barred from secondary school and women from university.",
      by:"Kiana Hayeri"},
@@ -76,28 +96,32 @@
      text:"Rahila, 20, Yalda, 18, and Zeinab, 14, work in a sewing workshop in western Kabul. Zeinab was about to enter Grade 7 when girls were barred from secondary school. She now sews school uniforms for younger girls who are still permitted to attend.",
      by:"Kiana Hayeri"},
     {n:"05", place:"Kabul, July 2021",
-     text:"Dr Soheila Siddiq at her hospital during patient check-ups.", by:"Mariam Alimi"},
-    {n:"06", place:"Kabul, 2013", text:"A Loya Jirga, or grand council, in Kabul.", by:"Mariam Alimi"},
-    {n:"07", place:"Kabul, April 2011", text:"A boxing coach with his student.", by:"Mariam Alimi"},
-    {n:"08", place:"Ghor, 2015", text:"A young girl reads to her class.", by:"Mariam Alimi"},
-    {n:"09", place:"Kabul Afghanistan, Esteqlal High school 2013",
-     text:"Young women sing a concert", by:"Mariam Alimi"},
-    {n:"10", scroll:true, place:"Madrid, October 2025 / The Hague, December 2025",
-     text:"Photographs from the Tribunal’s public hearings in Madrid in October 2025 and the delivery of its judgment in The Hague that December, documenting the proceedings and the work surrounding them.",
-     by:"Meha Desai"},
+     text:"Dr. Soheila Siddiq conducts patient checkups in Kabul. Since the Taliban’s return to power in August 2021, women’s access to healthcare has narrowed with alarming speed. Restrictions on movement, the exclusion of women from medical education, and deepening poverty have made it increasingly difficult for women and girls to seek care. At the same time, Afghanistan faces a growing shortage of female health professionals—leaving many women without safe, accessible, and dignified medical support.",
+     by:"Mariam Alimi"},
+    {n:"06", place:"Kabul, 2013",
+     text:"A Loya Jirga, or grand national assembly, convenes in Kabul. Rooted in Afghan cultural and political tradition, a Loya Jirga brings together representatives from communities across the country to deliberate questions of profound national importance. It is a space of collective counsel, where different voices meet to consider the future they share.",
+     by:"Mariam Alimi"},
+    {n:"07", place:"Kabul, April 2011",
+     text:"A boxing coach trains with his student in Kabul. From 2001 to 2021, Afghan women and girls claimed new space in sport — on cricket pitches, football fields, boxing rings, volleyball courts, and martial-arts mats. Since returning to power, the Taliban have barred all national women’s teams, closing down arenas where women had built skill, community, confidence, and public presence.",
+     by:"Mariam Alimi"},
+    {n:"08", place:"Ghor, 2015",
+     text:"A young girl reads to her class in Ghor province. Today, Afghanistan is the only country in the world where girls are barred from both secondary and higher education. Girls may attend school only through Grade 6. Since 2021, more than 2.6 million girls have been denied the chance to continue their education.",
+     by:"Mariam Alimi"},
+    {n:"09", place:"Kabul Afghanistan, 2013, Esteqlal High School",
+     text:"A young woman performing at a concert at Esteqlal High School in Kabul. Taliban laws now prohibit women from singing in public while restricting their voices from being heard outside the home.",
+     by:"Mariam Alimi"},
     {kind:"credits", short:"Credits"}
   ];
 
-  function kicker(c){ return (c.scroll ? "Photo scroll " : "Photograph ") + c.n; }
+  function kicker(c){ return "Photograph " + c.n; }
 
-  /* Which room each photograph hangs in, taken from the document's own
-     attributions: photographs 01-09 are the Hayeri and Alimi walls of
-     entry 2, and photo scroll 10 is Desai's Work of Witness, entry 3.
+  /* Which room each photograph hangs in: photographs 01-09 are the
+     Hayeri and Alimi walls of entry 2, Erasure Rendered Visible.
      Indices point into GUIDE. */
-  var ROOM_OF = {"01":2,"02":2,"03":2,"04":2,"05":2,"06":2,"07":2,"08":2,"09":2,"10":3};
+  var ROOM_OF = {"01":2,"02":2,"03":2,"04":2,"05":2,"06":2,"07":2,"08":2,"09":2};
 
   /* Photographs live in images/photographs/ named by plate number,
-     01.jpg through 10.jpg. Same fallback as the guide slides. */
+     01.jpg through 09.jpg. Same fallback as the guide slides. */
   CAPTIONS.forEach(function(c){
     if(c.n) c.img = "images/photographs/"+c.n+".jpg";
   });
@@ -120,7 +144,7 @@
       '</div></div>';
   }
   function edictsHTML(){
-    var c=""; for(var i=0;i<100;i++) c+="<i></i>";
+    var c=""; for(var i=0;i<150;i++) c+="<i></i>";
     return '<div class="grid100" aria-hidden="true">'+c+'</div>';
   }
   function playerHTML(src){
@@ -150,6 +174,7 @@
     var paras = s.body.map(function(p,idx){
       var cls = "";
       if(p.indexOf("<em class='lead'>")===0) cls = ' class="lead"';
+      else if(p.indexOf("<pull>")===0){ cls = ' class="pull"'; p = p.slice(6); }
       else if(s.notes && s.notes[idx]) cls = ' class="note"';
       var html = '<p'+cls+'>'+p+'</p>';
       var af = s.after && s.after[idx];
@@ -173,13 +198,14 @@
       return '<section class="spread solo"><div class="creditwrap"><div class="creditgrid">'+
         '<section><h4>Exhibition</h4><p><b>Where Justice Lives</b></p></section>'+
         '<section><h4>Venue</h4><p>Atelier Jolie, New York</p></section>'+
-        '<section><h4>Dates</h4><p>15 September – 2 October 2026</p></section>'+
+        '<section><h4>Dates</h4><p>15 September–2 October 2026</p></section>'+
         '<section><h4>Presented by</h4><p>Organization for Policy Research and Development Studies (DROPS)<br>ConneXUS Collaborative</p></section>'+
-        '<section><h4>Made possible by</h4><p>ODI Global’s partnership with Fondation CHANEL</p></section>'+
-        '<section><h4>Curatorial and editorial advisor</h4><p>Meha Desai</p></section>'+
+        '<section><h4>Made possible by</h4><p>ODI Global’s partnership with Fondation CHANEL<br>Open Society Foundations</p></section>'+
+        '<section><h4>Exhibition Design and Curation</h4><p>Mariam Safi, Rina Amiri, Meha Desai</p></section>'+
         '<section><h4>Exhibition production</h4><p>It’s Handled by H</p></section>'+
-        '<section><h4>Digital experience</h4><p>Joshua Omosebi / Seba Agency</p></section>'+
-        '<section><h4>Sound design</h4><p>Designers of Record</p></section>'+
+        '<section><h4>Digital Experience</h4><p>Seba Agency</p></section>'+
+        '<section><h4>Design of Where Justice Lives book</h4><p>OHSOBOHO</p></section>'+
+        '<section><h4>Sound Design</h4><p>Designers of Record</p></section>'+
         '<section><h4>Photography</h4><p>Mariam Alimi<br>Meha Desai<br>Kiana Hayeri / Fondation Carmignac</p></section>'+
       '</div></div></section>';
     }
@@ -394,7 +420,7 @@
           '<li><b>Title</b><span>Tap “Where Justice Lives” to come back to the opening screen.</span></li>'+
         '</ul></div>'+
       '<div class="sheet-sec"><h4>The Guide · 7 entries</h4>'+ jumpList(GUIDE,"a") +'</div>'+
-      '<div class="sheet-sec"><h4>Captions · 10 photographs</h4>'+ jumpList(CAPTIONS,"b") +'</div>'+
+      '<div class="sheet-sec"><h4>Captions · 9 photographs</h4>'+ jumpList(CAPTIONS,"b") +'</div>'+
       '<div class="sheet-actions">'+
         '<button class="btn-ghost" data-act="home">Opening screen</button>'+
         '<button class="btn-solid" data-act="close">Close</button>'+

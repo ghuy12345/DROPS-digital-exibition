@@ -9,7 +9,7 @@ index.html            page markup
 css/styles.css        all styles
 js/app.js             guide + captions content and the reader
 images/guide/         one picture per guide entry (see filenames below)
-images/photographs/   01.jpg … 10.jpg, one per numbered photograph
+images/photographs/   01.jpg … 09.jpg, one per numbered photograph
 audio/                sounds-from-kabul.mp3
 ```
 
@@ -17,9 +17,9 @@ audio/                sounds-from-kabul.mp3
 
 Each slide shows a placeholder naming the exact file it expects. Add the file with that name and it appears automatically; nothing else needs editing.
 
-Guide pictures (`images/guide/`): `introduction.jpg`, `artwork.jpg`, `womens-lives.jpg`, `work-of-witness.jpg`, `messages.jpg`, `response.jpg`, `edicts-sounds.jpg`
+Guide pictures (`images/guide/`): `introduction.jpg`, `six-words.jpg`, `erasure-rendered-visible.jpg`, `bearing-witness.jpg`, `in-their-own-words.jpg`, `entering-the-conversation.jpg`, `echoes-of-erasure.jpg`
 
-Photographs (`images/photographs/`): `01.jpg` through `10.jpg`
+Photographs (`images/photographs/`): `01.jpg` through `09.jpg`
 
 Sound work (`audio/`): `sounds-from-kabul.mp3`. The player stays disabled until the file loads.
 
