@@ -1,0 +1,416 @@
+/* ============================================================
+   Mobile first. Base rules are the phone; media queries add
+   the larger screens. Single committed dark world, a guide
+   read in a dimmed gallery, every colour painted explicitly.
+   ============================================================ */
+:root{
+  --ground:#0E0F13;
+  --ground-2:#16181E;
+  --frame:#242830;
+  --frame-lit:#3A3F4A;
+  --paper:#F2EFE9;
+  --paper-dim:#BCBAB3;
+  /* lifted from #6E717A: small labels need real contrast on this ground */
+  --paper-faint:#8E9199;
+  --crimson:#C8433D;
+  --crimson-lit:#EE7068;
+
+  --bar-top:58px;
+  --bar-bot:calc(70px + env(safe-area-inset-bottom, 0px));
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  background:var(--ground);color:var(--paper);
+  font-family:"Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  overflow:hidden;overscroll-behavior:none;
+  -webkit-tap-highlight-color:rgba(200,67,61,.18);
+}
+::selection{background:var(--crimson);color:var(--paper)}
+:focus-visible{outline:3px solid var(--crimson-lit);outline-offset:2px}
+button{font-family:inherit}
+
+/* Small caps labels carried the worst of the legibility problem: they were
+   10px at weight 500. Bigger, heavier, and less letter-spaced now. */
+.eyebrow{
+  font-size:12.5px;text-transform:uppercase;letter-spacing:.13em;font-weight:600;
+  color:var(--paper-faint);
+}
+[hidden]{display:none !important}
+
+/* ============================================================
+   1. OPENING SCREEN
+   ============================================================ */
+#entry{
+  position:fixed;inset:0;z-index:60;background:var(--ground);
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
+  display:flex;flex-direction:column;
+  padding:calc(28px + env(safe-area-inset-top,0px)) 20px calc(28px + env(safe-area-inset-bottom,0px));
+}
+.entry-inner{
+  margin:auto;width:100%;max-width:560px;
+  display:flex;flex-direction:column;gap:26px;
+}
+.entry-head{text-align:center;display:flex;flex-direction:column;gap:12px}
+.entry-head h1{
+  font-family:"Bodoni Moda",Didot,serif;font-weight:600;
+  font-size:clamp(42px,13.5vw,74px);line-height:.98;letter-spacing:-.015em;
+  margin:0;text-wrap:balance;
+}
+.entry-meta{
+  display:flex;flex-direction:column;gap:4px;font-weight:600;
+  font-size:12.5px;text-transform:uppercase;letter-spacing:.13em;color:var(--paper-faint);
+}
+.entry-conc{
+  margin:0;color:var(--paper-dim);font-weight:400;font-size:18px;line-height:1.6;
+  border-top:1px solid var(--frame);border-bottom:1px solid var(--frame);
+  padding:20px 0;text-align:center;
+}
+.entry-conc b{color:var(--paper);font-weight:600}
+
+.ask{text-align:center;color:var(--paper-faint);font-size:12.5px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.13em;margin:0}
+
+.choices{display:flex;flex-direction:column;gap:12px}
+.choice{
+  appearance:none;width:100%;text-align:left;cursor:pointer;
+  background:var(--ground-2);border:1px solid var(--frame);border-radius:3px;
+  color:var(--paper);padding:18px 18px 16px;min-width:0;
+  /* minmax(0,1fr), not 1fr: a bare fr floors at min-content, so the long
+     count line pushed the card wider instead of wrapping inside it */
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;align-items:start;
+  transition:border-color .2s ease,background .2s ease;
+}
+.choice > *{min-width:0;overflow-wrap:break-word}
+.choice:hover,.choice:focus-visible{border-color:var(--crimson);background:#1A1D24}
+.choice .when{grid-column:1;color:var(--crimson-lit);font-size:12.5px;
+  text-transform:uppercase;letter-spacing:.13em;font-weight:600}
+.choice h2{
+  grid-column:1;margin:6px 0 0;font-family:"Bodoni Moda",serif;font-weight:600;
+  font-size:32px;line-height:1.08;letter-spacing:-.008em;
+}
+.choice p{grid-column:1;margin:10px 0 0;color:var(--paper-dim);font-size:17px;
+  font-weight:400;line-height:1.55}
+.choice .count{
+  grid-column:1;margin-top:13px;padding-top:12px;border-top:1px solid var(--frame);
+  font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--paper-faint);white-space:normal;line-height:1.7;
+}
+.choice .go{
+  grid-column:2;grid-row:1 / span 4;align-self:center;
+  color:var(--frame-lit);font-size:24px;line-height:1;transition:color .2s ease;
+}
+.choice:hover .go,.choice:focus-visible .go{color:var(--crimson)}
+.entry-foot{text-align:center;color:var(--paper-faint);font-size:14.5px;font-weight:400;margin:0}
+
+@media (min-width:720px){
+  #entry{padding:40px}
+  .entry-inner{max-width:900px;gap:32px}
+  .entry-conc{font-size:19.5px;max-width:34em;margin-inline:auto}
+  .choices{flex-direction:row}
+  /* min-width:0 or the flex item refuses to shrink below its content */
+  .choice{flex:1;min-width:0}
+}
+
+/* ============================================================
+   2. READER CHROME
+   ============================================================ */
+.topbar{
+  position:fixed;top:0;left:0;right:0;height:var(--bar-top);z-index:40;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:0 12px 0 14px;border-bottom:1px solid var(--frame);background:var(--ground);
+}
+.brand{
+  display:flex;align-items:baseline;gap:10px;min-width:0;
+  background:none;border:0;padding:0;color:var(--paper);cursor:pointer;text-align:left;
+}
+.brand b{font-family:"Bodoni Moda",Didot,serif;font-weight:600;font-size:18px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand .eyebrow{display:none;white-space:nowrap}
+.brand:hover b{color:var(--crimson-lit)}
+
+.controls{display:flex;align-items:center;gap:8px;flex:none}
+.decks{display:flex;gap:2px;background:var(--frame);padding:2px;border-radius:3px}
+.decks button{
+  appearance:none;border:0;cursor:pointer;background:transparent;color:var(--paper-dim);
+  font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:600;
+  padding:8px 13px;border-radius:2px;min-height:38px;
+}
+.decks button[aria-pressed="true"]{background:var(--paper);color:var(--ground)}
+.info-btn{
+  appearance:none;cursor:pointer;background:transparent;border:1px solid var(--frame-lit);
+  color:var(--paper-dim);width:38px;height:38px;border-radius:50%;flex:none;
+  display:grid;place-items:center;font-family:"Bodoni Moda",serif;font-style:italic;
+  font-size:18px;font-weight:600;line-height:1;padding:0;
+  transition:border-color .2s,color .2s;
+}
+.info-btn:hover,.info-btn[aria-expanded="true"]{border-color:var(--crimson);color:var(--crimson-lit)}
+/* Hidden on phones, where the bar has no room for it. Credits stay reachable
+   there from the info sheet and at the end of the Captions deck. */
+.credits-btn{
+  display:none;
+  appearance:none;cursor:pointer;background:transparent;border:1px solid var(--frame-lit);
+  color:var(--paper-dim);height:38px;border-radius:3px;flex:none;padding:0 13px;
+  font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:600;
+  transition:border-color .2s ease,color .2s ease;
+}
+@media (min-width:600px){ .credits-btn{display:inline-flex;align-items:center} }
+.credits-btn:hover,.credits-btn[aria-current="true"]{border-color:var(--crimson);color:var(--crimson-lit)}
+
+/* ============================================================
+   3. STAGE + SPREADS
+   ============================================================ */
+.stage{position:fixed;top:var(--bar-top);bottom:var(--bar-bot);left:0;right:0;overflow:hidden}
+.track{display:flex;height:100%;width:100%;transition:transform .5s cubic-bezier(.22,.61,.36,1);will-change:transform}
+
+.spread{
+  flex:0 0 100%;height:100%;min-width:0;
+  display:grid;grid-template-rows:30% minmax(0,1fr);grid-template-columns:1fr;
+}
+.spread.solo{grid-template-rows:minmax(0,1fr)}
+
+.fig{position:relative;background:var(--ground-2);overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  border-bottom:1px solid var(--frame)}
+/* the photograph sits over the placeholder; if the file is missing the
+   script drops the <img> and the placeholder below shows through */
+.fig img{position:absolute;inset:0;z-index:1;width:100%;height:100%;
+  object-fit:cover;display:block}
+.fig .slot{position:relative;z-index:0;text-align:center;padding:0 24px;max-width:340px}
+.fig .slot b{display:block;font-family:"Bodoni Moda",serif;font-size:50px;font-weight:600;
+  color:var(--frame-lit);line-height:1}
+.fig .slot span{display:block;margin-top:10px;font-size:12px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.12em;color:var(--paper-faint);line-height:1.8}
+/* the file this slide is waiting for, so the picture research knows
+   exactly what to name each drop-in */
+.fig .slot code{display:block;margin-top:10px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:12px;color:var(--frame-lit);line-height:1.7;word-break:break-all}
+
+.txt{
+  padding:22px 20px 30px;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+}
+.txt-inner{max-width:34em}
+.spread.solo .txt-inner{margin-inline:auto}
+.loc{color:var(--crimson-lit);margin-bottom:10px;display:block}
+.spread h2{
+  font-family:"Bodoni Moda",Didot,serif;font-weight:600;
+  font-size:clamp(30px,8vw,39px);line-height:1.08;letter-spacing:-.008em;
+  margin:0 0 16px;text-wrap:balance;
+}
+.rule{width:44px;height:3px;background:var(--crimson);margin:0 0 18px}
+.spread p{margin:0 0 .95em;color:var(--paper-dim);font-weight:400;font-size:18px;line-height:1.65}
+.spread p:last-child{margin-bottom:0}
+.spread p.lead{color:var(--paper);font-weight:500;font-size:20.5px;line-height:1.55}
+.spread p.note{font-style:italic;color:var(--paper-faint);font-weight:400;font-size:17px}
+.byline{margin-top:22px;padding-top:14px;border-top:1px solid var(--frame);
+  font-size:12.5px;font-weight:600;text-transform:uppercase;letter-spacing:.11em;
+  color:var(--paper-faint);line-height:1.7}
+.byline b{color:var(--paper-dim);font-weight:700}
+
+/* one hundred edicts, one square per edict */
+.grid100{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;max-width:230px;
+  margin:18px 0 1.1em}
+.grid100 i{display:block;aspect-ratio:1;background:var(--crimson);opacity:.82}
+.grid100 i:nth-child(3n){opacity:.6}
+.grid100 i:nth-child(7n){opacity:.45}
+
+/* sound work player */
+.player{margin:20px 0 1.1em;max-width:34em}
+.player-row{display:flex;align-items:center;gap:12px}
+.player-play{
+  appearance:none;cursor:pointer;flex:none;width:52px;height:52px;border-radius:50%;
+  background:transparent;border:2px solid var(--crimson);color:var(--crimson-lit);
+  display:grid;place-items:center;font-size:14px;line-height:1;padding:0;
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+.player-play:hover:not(:disabled){background:var(--crimson);color:var(--paper)}
+.player-play:disabled{border-color:var(--frame-lit);color:var(--frame-lit);cursor:default}
+.player-bar{flex:1;height:3px;background:var(--frame);position:relative;cursor:pointer}
+.player.is-empty .player-bar{cursor:default}
+.player-fill{position:absolute;top:0;bottom:0;left:0;width:0;background:var(--crimson)}
+.player-time{flex:none;font-size:13.5px;font-weight:500;color:var(--paper-faint);
+  font-variant-numeric:tabular-nums;min-width:44px;text-align:right}
+.player-note{display:block;margin-top:10px;font-size:12px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.12em;color:var(--paper-faint)}
+.player-note:empty{display:none}
+.player-note code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  text-transform:none;letter-spacing:0;color:var(--frame-lit)}
+
+/* cross references between a room and its photographs */
+.quickref{margin-top:20px}
+.quickref-lab{display:block;font-size:12.5px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.12em;color:var(--paper-faint);margin-bottom:10px}
+.quickref-row{display:flex;flex-wrap:wrap;gap:7px}
+.quickref-row button{
+  appearance:none;cursor:pointer;background:transparent;border:1px solid var(--frame-lit);
+  color:var(--paper-dim);min-width:48px;min-height:44px;padding:0 11px;border-radius:3px;
+  font-family:inherit;font-size:15px;font-weight:600;letter-spacing:.04em;
+  font-variant-numeric:tabular-nums;
+  transition:border-color .2s ease,color .2s ease,background .2s ease;
+}
+.quickref-row button:hover,.quickref-row button:focus-visible{
+  border-color:var(--crimson);color:var(--paper);background:#1A1D24}
+
+.roomlink{margin-top:16px}
+.roomlink button{
+  appearance:none;cursor:pointer;background:transparent;border:0;padding:0;
+  color:var(--crimson-lit);font-family:inherit;font-size:12.5px;text-transform:uppercase;
+  letter-spacing:.11em;font-weight:600;text-align:left;line-height:1.6;
+  border-bottom:1px solid transparent;min-height:38px;
+}
+.roomlink button:hover,.roomlink button:focus-visible{border-bottom-color:var(--crimson)}
+.roomlink button::after{content:" \2192"}
+
+/* caption plate */
+.plate-meta{
+  font-family:"Bodoni Moda",serif;font-size:clamp(22px,5.8vw,28px);font-weight:600;
+  line-height:1.24;margin:0 0 16px;letter-spacing:-.004em;
+}
+.pull{
+  margin:20px 0 0;padding:17px 0 0;border-top:1px solid var(--frame);
+  font-family:"Bodoni Moda",serif;font-style:italic;font-weight:500;
+  font-size:20.5px;line-height:1.45;color:var(--paper);
+}
+.pull::before{content:"\201C";color:var(--crimson);font-size:1.3em;line-height:0;
+  vertical-align:-.15em;margin-right:.06em}
+
+/* credits spread */
+.creditwrap{padding:26px 20px 34px;overflow-y:auto;overscroll-behavior:contain}
+.creditgrid{display:grid;grid-template-columns:1fr;gap:20px;width:100%;max-width:900px;margin:0 auto}
+.creditgrid section h4{margin:0 0 6px;font-size:12.5px;text-transform:uppercase;
+  letter-spacing:.12em;color:var(--crimson-lit);font-weight:700}
+.creditgrid p{margin:0;font-size:17px;color:var(--paper-dim);font-weight:400;line-height:1.55}
+.creditgrid p b{color:var(--paper);font-weight:600}
+
+/* The dateline waits for a wide bar: at 640px it collided with the
+   Credits button now sitting alongside it. */
+@media (min-width:1000px){
+  .brand .eyebrow{display:block}
+}
+@media (min-width:860px){
+  :root{--bar-top:64px;--bar-bot:calc(74px + env(safe-area-inset-bottom,0px))}
+  .topbar{padding:0 18px 0 24px}
+  .brand b{font-size:20px}
+  .spread{grid-template-rows:none;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr)}
+  .spread.solo{grid-template-columns:1fr}
+  .fig{border-bottom:0;border-right:1px solid var(--frame)}
+  .fig .slot b{font-size:68px}
+  /* Centre with auto margins, never justify-content:center. On a scrolling
+     box, centred flex content that outgrows the box overflows past the top
+     and cannot be scrolled back to, which was clipping the headings. */
+  .txt{padding:clamp(30px,4vw,56px);display:flex;flex-direction:column}
+  .txt-inner{margin-block:auto}
+  .spread h2{font-size:clamp(34px,3.8vw,52px);margin-bottom:20px}
+  .spread p{font-size:19.5px}
+  .spread p.lead{font-size:22.5px}
+  .plate-meta{font-size:clamp(26px,2.6vw,32px)}
+  .creditwrap{display:flex;align-items:flex-start;padding:40px}
+  .creditgrid{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:26px 34px;
+    margin-block:auto}
+}
+
+/* ============================================================
+   4. FOOTER NAV
+   ============================================================ */
+.footbar{
+  position:fixed;bottom:0;left:0;right:0;height:var(--bar-bot);z-index:40;
+  display:flex;align-items:center;gap:12px;padding:0 12px;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  border-top:1px solid var(--frame);background:var(--ground);
+}
+/* Scoped to the footer. The opening-screen cards also use a .count span,
+   and a bare .count here was leaking white-space:nowrap into them, so the
+   "7 entries · Main Gallery…" line could never wrap and ran off the card. */
+.footbar .count{font-size:14px;font-weight:500;letter-spacing:.06em;color:var(--paper-faint);
+  font-variant-numeric:tabular-nums;white-space:nowrap;flex:none}
+.footbar .count b{color:var(--paper);font-weight:700}
+.pips{display:flex;gap:4px;flex:1;min-width:0;height:40px;align-items:center}
+.pips button{
+  appearance:none;border:0;cursor:pointer;background:transparent;padding:0;
+  height:100%;flex:1;min-width:5px;display:flex;align-items:center;
+}
+.pips button::after{content:"";display:block;width:100%;height:3px;background:var(--frame);
+  transition:background .25s ease}
+.pips button:hover::after{background:var(--frame-lit)}
+.pips button[aria-current="true"]::after{background:var(--crimson);height:4px}
+.arrows{display:flex;gap:6px;flex:none}
+.arrows button{
+  appearance:none;cursor:pointer;background:transparent;color:var(--paper);
+  border:1px solid var(--frame-lit);width:50px;height:44px;border-radius:3px;
+  font-size:19px;line-height:1;display:grid;place-items:center;padding:0;
+  transition:border-color .2s ease,color .2s ease;
+}
+.arrows button:hover:not(:disabled){border-color:var(--crimson);color:var(--crimson-lit)}
+.arrows button:disabled{color:var(--frame-lit);border-color:var(--frame);cursor:default}
+.hint{display:none;font-size:12px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.11em;color:var(--paper-faint);white-space:nowrap}
+@media (min-width:860px){
+  .footbar{gap:18px;padding:0 24px}
+  .hint{display:block}
+}
+
+/* ============================================================
+   5. INFO SHEET
+   ============================================================ */
+.scrim{position:fixed;inset:0;z-index:70;background:rgba(8,9,12,.72);border:0;padding:0;
+  animation:fade .22s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.sheet{
+  position:fixed;z-index:71;left:0;right:0;bottom:0;top:auto;
+  max-height:86dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+  background:var(--ground);border-top:1px solid var(--frame-lit);
+  border-radius:10px 10px 0 0;
+  padding:8px 20px calc(28px + env(safe-area-inset-bottom,0px));
+  animation:rise .3s cubic-bezier(.22,.61,.36,1);
+}
+@keyframes rise{from{transform:translateY(14%);opacity:.4}to{transform:none;opacity:1}}
+.grab{width:38px;height:4px;border-radius:2px;background:var(--frame-lit);margin:0 auto 18px}
+.sheet h3{font-family:"Bodoni Moda",serif;font-weight:600;font-size:28px;margin:0 0 5px;letter-spacing:-.008em}
+.sheet .sub{margin:0 0 22px;color:var(--paper-dim);font-size:17px;font-weight:400;line-height:1.55}
+.sheet-sec{border-top:1px solid var(--frame);padding:18px 0 4px}
+.sheet-sec > h4{margin:0 0 12px;font-size:12.5px;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--crimson-lit);font-weight:700}
+.howto{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px}
+.howto li{display:grid;grid-template-columns:92px 1fr;gap:12px;color:var(--paper-dim);
+  font-size:16.5px;font-weight:400;align-items:baseline;line-height:1.5}
+.howto li b{color:var(--paper);font-weight:700;font-size:12px;text-transform:uppercase;
+  letter-spacing:.1em}
+.jumps{margin:0;padding:0;list-style:none}
+.jumps button{
+  appearance:none;width:100%;text-align:left;cursor:pointer;background:transparent;
+  border:0;border-bottom:1px solid var(--frame);color:var(--paper-dim);
+  display:grid;grid-template-columns:42px 1fr;gap:10px;align-items:baseline;
+  padding:13px 0;font-size:17px;font-weight:400;min-height:52px;
+}
+.jumps button:hover,.jumps button:focus-visible{color:var(--paper)}
+.jumps button i{font-style:normal;font-size:13px;font-weight:600;letter-spacing:.06em;
+  color:var(--paper-faint);font-variant-numeric:tabular-nums}
+.jumps button:hover i{color:var(--crimson-lit)}
+.sheet-actions{display:flex;gap:10px;margin-top:24px}
+.sheet-actions button{
+  appearance:none;cursor:pointer;flex:1;min-height:52px;border-radius:3px;
+  font-size:13px;text-transform:uppercase;letter-spacing:.11em;font-weight:600;
+}
+.btn-ghost{background:transparent;border:1px solid var(--frame-lit);color:var(--paper-dim)}
+.btn-ghost:hover{border-color:var(--crimson);color:var(--crimson-lit)}
+.btn-solid{background:var(--paper);border:1px solid var(--paper);color:var(--ground)}
+.btn-solid:hover{background:var(--crimson);border-color:var(--crimson);color:var(--paper)}
+
+@media (min-width:720px){
+  .sheet{
+    left:50%;right:auto;bottom:auto;top:50%;transform:translate(-50%,-50%);
+    width:min(560px,92vw);max-height:84dvh;border-radius:4px;
+    border:1px solid var(--frame-lit);padding:26px 30px 30px;
+    animation:pop .24s cubic-bezier(.22,.61,.36,1);
+  }
+  @keyframes pop{from{transform:translate(-50%,-47%);opacity:0}to{transform:translate(-50%,-50%);opacity:1}}
+  .grab{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .track{transition:none}
+  .sheet,.scrim{animation:none}
+}

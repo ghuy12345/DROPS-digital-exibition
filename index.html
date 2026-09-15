@@ -1,1 +1,88 @@
-<p>Hello World</p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Where Justice Lives · Exhibition Visitor Guide</title>
+  <meta name="description" content="Visitor guide and photograph captions for Where Justice Lives, Atelier Jolie, New York, 15 September to 2 October 2026.">
+  <meta name="theme-color" content="#0E0F13">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ============ OPENING SCREEN ============ -->
+<section id="entry" aria-label="Opening screen">
+  <div class="entry-inner">
+    <div class="entry-head">
+      <span class="eyebrow">Exhibition Visitor Guide</span>
+      <h1>Where Justice Lives</h1>
+      <div class="entry-meta">
+        <span>Atelier Jolie · New York</span>
+        <span>15 September – 2 October 2026</span>
+      </div>
+    </div>
+
+    <p class="entry-conc">In December 2025 the People’s Tribunal for the Women of Afghanistan concluded that the Taliban’s policies and practices constitute <b>crimes against humanity, including gender persecution</b>.</p>
+
+    <p class="ask">What are you looking for?</p>
+
+    <div class="choices">
+      <button class="choice" data-go="a">
+        <span class="when">You’ve just arrived</span>
+        <h2>The Guide</h2>
+        <p>Seven entries, room by room: from the introduction to the edict room and the sound of Kabul.</p>
+        <span class="count">7 entries · Main Gallery, Graffiti Room, Basement</span>
+        <span class="go" aria-hidden="true">→</span>
+      </button>
+
+      <button class="choice" data-go="b">
+        <span class="when">You’re at a photograph</span>
+        <h2>Captions</h2>
+        <p>Look up a photograph by its number on the wall: the place, the date, the story and the photographer.</p>
+        <span class="count">Photographs 01–10 · plus full credits</span>
+        <span class="go" aria-hidden="true">→</span>
+      </button>
+    </div>
+
+    <p class="entry-foot">You can move between the two at any time.</p>
+  </div>
+</section>
+
+<!-- ============ READER ============ -->
+<div id="reader" hidden>
+  <header class="topbar">
+    <button class="brand" id="home" aria-label="Back to the opening screen">
+      <b>Where Justice Lives</b>
+      <span class="eyebrow">Atelier Jolie · 15 Sep – 2 Oct 2026</span>
+    </button>
+    <div class="controls">
+      <div class="decks" role="group" aria-label="Choose deck">
+        <button id="deck-a" aria-pressed="true">Guide</button>
+        <button id="deck-b" aria-pressed="false">Captions</button>
+      </div>
+      <button class="credits-btn" id="credits" aria-current="false">Credits</button>
+      <button class="info-btn" id="info" aria-expanded="false" aria-label="How to use this guide">i</button>
+    </div>
+  </header>
+
+  <div class="stage">
+    <div class="track" id="track"></div>
+  </div>
+
+  <footer class="footbar">
+    <div class="count"><b id="cur">01</b>&thinsp;/&thinsp;<span id="tot">07</span></div>
+    <div class="pips" id="pips" role="tablist" aria-label="Spreads"></div>
+    <span class="hint">← → to flip</span>
+    <div class="arrows">
+      <button id="prev" aria-label="Previous spread">←</button>
+      <button id="next" aria-label="Next spread">→</button>
+    </div>
+  </footer>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
