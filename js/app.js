@@ -2,6 +2,18 @@
   "use strict";
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){
     return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  var pendingCaptures = [];
+  function capture(event, properties){
+    if(window.posthog && window.posthog.capture){
+      window.posthog.capture(event, properties);
+    } else if(window.POSTHOG_CONFIG && window.POSTHOG_CONFIG.projectToken && window.POSTHOG_CONFIG.host){
+      pendingCaptures.push([event, properties]);
+    }
+  }
+  window.addEventListener("posthog:ready", function(){
+    pendingCaptures.forEach(function(args){ window.posthog.capture(args[0], args[1]); });
+    pendingCaptures = [];
+  });
 
   /* ------------------------------------------------------------
      Deck A, the guide. Every line below is from the final exhibition
@@ -270,7 +282,8 @@
         fill  = wrap.querySelector(".player-fill"),
         time  = wrap.querySelector(".player-time"),
         note  = wrap.querySelector(".player-note"),
-        src   = audio.getAttribute("src");
+        src   = audio.getAttribute("src"),
+        hasStarted = false;
 
     function setPlaying(on){
       play.innerHTML = on ? "&#10074;&#10074;" : "&#9654;";
@@ -292,7 +305,13 @@
       if(audio.duration) fill.style.width = (audio.currentTime/audio.duration*100)+"%";
       time.textContent = fmtTime(audio.currentTime);
     });
-    audio.addEventListener("play",  function(){ setPlaying(true); });
+    audio.addEventListener("play",  function(){
+      setPlaying(true);
+      if(!hasStarted){
+        hasStarted = true;
+        capture("audio_playback_started", {content_type:"soundscape"});
+      }
+    });
     audio.addEventListener("pause", function(){ setPlaying(false); });
     audio.addEventListener("ended", function(){
       setPlaying(false); fill.style.width = "0%";
@@ -325,9 +344,11 @@
     tot.textContent = pad(len);
   }
 
-  function go(n, instant){
-    if(n !== i) stopAudio();
-    i = Math.max(0, Math.min(len-1, n));
+  function go(n, instant, navigationMethod){
+    var nextIndex = Math.max(0, Math.min(len-1, n));
+    var changed = nextIndex !== i;
+    if(changed) stopAudio();
+    i = nextIndex;
     if(instant) track.style.transition="none";
     track.style.transform = "translate3d("+(-i*100)+"%,0,0)";
     if(instant) requestAnimationFrame(function(){ track.style.transition=""; });
@@ -344,20 +365,32 @@
       var s = t.querySelector(".txt") || t.querySelector(".creditwrap");
       if(s) s.scrollTop = 0;
     }
+    if(changed && navigationMethod){
+      capture("spread_navigated", {
+        deck:deck,
+        spread_position:i+1,
+        navigation_method:navigationMethod
+      });
+    }
   }
 
-  function setDeck(d, at){
+  function setDeck(d, at, selectionMethod){
+    var changed = deck !== d;
     deck = d;
     dA.setAttribute("aria-pressed", d==="a"?"true":"false");
     dB.setAttribute("aria-pressed", d==="b"?"true":"false");
     render();
-    go(at||0, true);
+    if(changed && selectionMethod){
+      capture("deck_selected", {deck:deck, selection_method:selectionMethod});
+    }
+    go(at||0, true, selectionMethod);
   }
 
   function openReader(d){
     entry.hidden = true;
     reader.hidden = false;
-    setDeck(d, 0);
+    capture("guide_opened", {deck:d});
+    setDeck(d, 0, "entry_choice");
   }
   function openEntry(){
     closeSheet();
@@ -371,22 +404,24 @@
     b.addEventListener("click", function(){ openReader(b.dataset.go); });
   });
   home.addEventListener("click", openEntry);
-  dA.addEventListener("click", function(){ setDeck("a"); });
-  dB.addEventListener("click", function(){ setDeck("b"); });
-  prev.addEventListener("click", function(){ go(i-1); });
-  next.addEventListener("click", function(){ go(i+1); });
+  dA.addEventListener("click", function(){ setDeck("a", 0, "deck_control"); });
+  dB.addEventListener("click", function(){ setDeck("b", 0, "deck_control"); });
+  prev.addEventListener("click", function(){ go(i-1, false, "arrow_control"); });
+  next.addEventListener("click", function(){ go(i+1, false, "arrow_control"); });
   pips.addEventListener("click", function(e){
-    var b = e.target.closest("button"); if(b) go(+b.dataset.i);
+    var b = e.target.closest("button"); if(b) go(+b.dataset.i, false, "progress_control");
   });
   creditsBtn.addEventListener("click", function(){
-    if(deck!=="b") setDeck("b", CREDITS_AT); else go(CREDITS_AT);
+    if(deck!=="b") setDeck("b", CREDITS_AT, "credits_control");
+    else go(CREDITS_AT, false, "credits_control");
   });
 
   /* cross-reference jumps inside a spread */
   track.addEventListener("click", function(e){
     var b = e.target.closest("button[data-jump]"); if(!b) return;
     var d = b.dataset.deck, n = +b.dataset.jump;
-    if(d!==deck) setDeck(d, n); else go(n);
+    if(d!==deck) setDeck(d, n, "cross_reference");
+    else go(n, false, "cross_reference");
   });
 
   /* ---------------- info sheet ---------------- */
@@ -399,6 +434,7 @@
 
   function openSheet(){
     if(sheetEls) return;
+    capture("guide_help_opened", {deck:deck});
     var scrim = document.createElement("button");
     scrim.className = "scrim";
     scrim.setAttribute("aria-label","Close");
@@ -438,7 +474,8 @@
       if(b.dataset.act==="home"){ openEntry(); return; }
       if(b.dataset.deck){
         var d = b.dataset.deck, n = +b.dataset.i;
-        if(d!==deck) setDeck(d, n); else go(n);
+        if(d!==deck) setDeck(d, n, "help_jump");
+        else go(n, false, "help_jump");
         closeSheet();
       }
     });
@@ -466,10 +503,10 @@
       return;
     }
     if(sheetEls || reader.hidden) return;
-    if(e.key==="ArrowRight"){ e.preventDefault(); go(i+1); }
-    else if(e.key==="ArrowLeft"){ e.preventDefault(); go(i-1); }
-    else if(e.key==="Home"){ e.preventDefault(); go(0); }
-    else if(e.key==="End"){ e.preventDefault(); go(len-1); }
+    if(e.key==="ArrowRight"){ e.preventDefault(); go(i+1, false, "keyboard"); }
+    else if(e.key==="ArrowLeft"){ e.preventDefault(); go(i-1, false, "keyboard"); }
+    else if(e.key==="Home"){ e.preventDefault(); go(0, false, "keyboard"); }
+    else if(e.key==="End"){ e.preventDefault(); go(len-1, false, "keyboard"); }
   });
 
   /* ---------------- swipe ---------------- */
@@ -484,7 +521,7 @@
         dt=Date.now()-t0;
     var far = Math.abs(dx) > 44;
     var flick = Math.abs(dx) > 18 && dt < 260;
-    if((far||flick) && Math.abs(dx) > Math.abs(dy)*1.4) go(dx<0 ? i+1 : i-1);
+    if((far||flick) && Math.abs(dx) > Math.abs(dy)*1.4) go(dx<0 ? i+1 : i-1, false, "swipe");
     x0=y0=null;
   }, {passive:true});
 
