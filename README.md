@@ -23,6 +23,10 @@ Photographs (`images/photographs/`): `01.jpg` through `09.jpg`
 
 Sound work (`audio/`): `sounds-from-kabul.mp3`. The player stays disabled until the file loads.
 
+## Updating CSS or JS
+
+`index.html` loads the stylesheet and scripts with a version tag, e.g. `js/app.js?v=2026-09-28`. Whenever you change a file in `css/` or `js/`, change that tag (today's date works) on all three links. Otherwise visitors' browsers can keep an old saved copy and mix it with the new page.
+
 ## GitHub Pages
 
 Push this folder as the repository root (or set Pages to serve from the folder). All paths are relative, so it works at `user.github.io/repo/` without changes.
