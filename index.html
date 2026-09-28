@@ -45,9 +45,42 @@
         <span class="count">Photographs 01–09 · plus full credits</span>
         <span class="go" aria-hidden="true">→</span>
       </button>
+
+      <button class="choice choice-wide" data-go="edicts">
+        <span class="when">The measures, one by one</span>
+        <h2>The Edicts</h2>
+        <p>Every decree, policy and law issued against women and girls since August 2021, read one at a time.</p>
+        <span class="count">Edicts 001–100</span>
+        <span class="go" aria-hidden="true">→</span>
+      </button>
     </div>
 
-    <p class="entry-foot">You can move between the two at any time.</p>
+    <p class="entry-foot">You can move between them at any time.</p>
+  </div>
+</section>
+
+<!-- ============ THE EDICTS ============ -->
+<section id="edicts" aria-label="The Edicts" hidden>
+  <header class="topbar">
+    <button class="brand" id="edicts-home" aria-label="Back to the opening screen">
+      <b>Where Justice Lives</b>
+      <span class="eyebrow">Atelier Jolie · 16 - 26 Sept 2026</span>
+    </button>
+    <div class="ed-count" aria-live="off"><b id="ed-cur">001</b>&thinsp;/&thinsp;<span id="ed-tot">100</span></div>
+  </header>
+
+  <div class="ed-scroll" id="ed-scroll">
+    <div class="ed-intro">
+      <span class="eyebrow">The Edicts</span>
+      <h2>The Edicts</h2>
+      <div class="rule"></div>
+      <p>Since August 2021, the Taliban have issued more than 150 decrees, policies, and laws reaching into every part of women’s lives — public and private.</p>
+      <span class="ed-hint" aria-hidden="true">Scroll ↓</span>
+    </div>
+    <ol class="ed-list" id="ed-list"></ol>
+    <div class="ed-end">
+      <button class="btn-ghost" id="edicts-back">Back to the opening screen</button>
+    </div>
   </div>
 </section>
 

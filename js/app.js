@@ -125,6 +125,15 @@
     {kind:"credits", short:"Credits"}
   ];
 
+  /* ------------------------------------------------------------
+     The Edicts. Placeholder wording until the final list arrives;
+     replace each text with the measure itself.
+     ------------------------------------------------------------ */
+  var EDICTS = [];
+  for(var e=1; e<=100; e++){
+    EDICTS.push({text:"Placeholder for edict "+e+". The wording of this measure will appear here."});
+  }
+
   function kicker(c){ return "Photograph " + c.n; }
 
   /* Which room each photograph hangs in: photographs 01-09 are the
@@ -396,13 +405,81 @@
     closeSheet();
     stopAudio();
     reader.hidden = true;
+    edicts.hidden = true;
     entry.hidden = false;
     entry.scrollTop = 0;
   }
 
+  /* ---------------- the edicts ---------------- */
+  var edicts=document.getElementById("edicts"),
+      edScroll=document.getElementById("ed-scroll"),
+      edList=document.getElementById("ed-list"),
+      edCur=document.getElementById("ed-cur"),
+      edRows=[], edTops=[], edFrame=0;
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  function pad3(n){ return ("00"+n).slice(-3); }
+
+  function renderEdicts(){
+    if(edRows.length) return;
+    edList.innerHTML = EDICTS.map(function(ed,k){
+      return '<li class="edict"><article class="edict-card">'+
+        '<span class="edict-num" aria-label="Edict '+(k+1)+'">'+pad3(k+1)+'</span>'+
+        '<span class="edict-tag">Edict</span>'+
+        '<div class="edict-rule" aria-hidden="true"></div>'+
+        '<p class="edict-text">'+esc(ed.text)+'</p>'+
+      '</article></li>';
+    }).join("");
+    document.getElementById("ed-tot").textContent = pad3(EDICTS.length);
+    edRows = Array.prototype.slice.call(edList.children);
+  }
+
+  /* Row positions only move on resize, never on scroll, since the
+     animation is all transforms. Measure once, then scrolling is
+     arithmetic against scrollTop. */
+  function measureEdicts(){
+    /* .ed-scroll is positioned, so it is each row's offsetParent */
+    edTops = edRows.map(function(r){ return r.offsetTop + r.offsetHeight/2; });
+    paintEdicts();
+  }
+
+  function paintEdicts(){
+    edFrame = 0;
+    var h = edScroll.clientHeight, mid = edScroll.scrollTop + h/2,
+        reach = h*0.62, best = 0, bestD = Infinity;
+    for(var k=0; k<edRows.length; k++){
+      var d = Math.abs(edTops[k] - mid);
+      if(d < bestD){ bestD = d; best = k; }
+      if(reduceMotion && reduceMotion.matches) continue;
+      var t = Math.max(0, 1 - d/reach);
+      var p = t*t*(3 - 2*t);            // smoothstep: eases in and out
+      edRows[k].style.setProperty("--p", p.toFixed(3));
+    }
+    edCur.textContent = pad3(best+1);
+  }
+
+  edScroll.addEventListener("scroll", function(){
+    if(!edFrame) edFrame = requestAnimationFrame(paintEdicts);
+  }, {passive:true});
+  window.addEventListener("resize", function(){ if(!edicts.hidden) measureEdicts(); });
+
+  function openEdicts(){
+    entry.hidden = true;
+    reader.hidden = true;
+    edicts.hidden = false;
+    renderEdicts();
+    edScroll.scrollTop = 0;
+    measureEdicts();
+    capture("edicts_opened", {});
+  }
+
   document.querySelectorAll(".choice").forEach(function(b){
-    b.addEventListener("click", function(){ openReader(b.dataset.go); });
+    b.addEventListener("click", function(){
+      if(b.dataset.go==="edicts") openEdicts(); else openReader(b.dataset.go);
+    });
   });
+  document.getElementById("edicts-home").addEventListener("click", openEntry);
+  document.getElementById("edicts-back").addEventListener("click", openEntry);
   home.addEventListener("click", openEntry);
   dA.addEventListener("click", function(){ setDeck("a", 0, "deck_control"); });
   dB.addEventListener("click", function(){ setDeck("b", 0, "deck_control"); });
@@ -499,7 +576,7 @@
     if(e.metaKey||e.ctrlKey||e.altKey) return;
     if(e.key==="Escape"){
       if(sheetEls){ e.preventDefault(); closeSheet(); }
-      else if(!reader.hidden){ e.preventDefault(); openEntry(); }
+      else if(!reader.hidden || !edicts.hidden){ e.preventDefault(); openEntry(); }
       return;
     }
     if(sheetEls || reader.hidden) return;

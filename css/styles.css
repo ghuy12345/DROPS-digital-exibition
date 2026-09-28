@@ -14,6 +14,9 @@
   --paper-faint:#8E9199;
   --crimson:#C8433D;
   --crimson-lit:#EE7068;
+  --rose:#E09AA0;
+  /* the edict numerals: present but barely, a watermark rather than a label */
+  --numeral:#3C404A;
 
   --bar-top:58px;
   --bar-bot:calc(70px + env(safe-area-inset-bottom, 0px));
@@ -109,9 +112,11 @@ button{font-family:inherit}
   #entry{padding:40px}
   .entry-inner{max-width:900px;gap:32px}
   .entry-conc{font-size:19.5px;max-width:34em;margin-inline:auto}
-  .choices{flex-direction:row}
-  /* min-width:0 or the flex item refuses to shrink below its content */
-  .choice{flex:1;min-width:0}
+  .choices{flex-direction:row;flex-wrap:wrap}
+  /* min-width:0 or the flex item refuses to shrink below its content.
+     Basis 0 keeps the two half cards on one line; the wide card wraps. */
+  .choice{flex:1 1 0;min-width:0}
+  .choice.choice-wide{flex-basis:100%}
 }
 
 /* ============================================================
@@ -410,7 +415,79 @@ button{font-family:inherit}
   @keyframes pop{from{transform:translate(-50%,-47%);opacity:0}to{transform:translate(-50%,-50%);opacity:1}}
   .grab{display:none}
 }
+/* ============================================================
+   6. THE EDICTS
+   A long vertical scroll. Each edict eases open as it nears the
+   middle of the screen and folds away again as it leaves, in
+   both directions. js/app.js writes --p (0 to 1) on every row.
+   ============================================================ */
+#edicts{position:fixed;inset:0;z-index:50;background:var(--ground)}
+.ed-count{font-size:14px;font-weight:500;letter-spacing:.06em;color:var(--paper-faint);
+  font-variant-numeric:tabular-nums;white-space:nowrap;flex:none}
+.ed-count b{color:var(--paper);font-weight:700}
+.ed-scroll{
+  position:absolute;top:var(--bar-top);bottom:0;left:0;right:0;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+  padding:0 20px calc(40px + env(safe-area-inset-bottom,0px));
+}
+.ed-intro{
+  max-width:34em;margin:0 auto;min-height:calc(100dvh - var(--bar-top));
+  display:flex;flex-direction:column;justify-content:center;padding:40px 0;
+}
+.ed-intro .eyebrow{color:var(--crimson-lit);margin-bottom:10px}
+.ed-intro h2{
+  font-family:"Bodoni Moda",Didot,serif;font-weight:600;
+  font-size:clamp(42px,12vw,74px);line-height:.98;letter-spacing:-.015em;margin:0 0 18px;
+}
+.ed-intro p{margin:0;color:var(--paper-dim);font-size:18px;line-height:1.65}
+.ed-hint{margin-top:34px;font-size:12px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.13em;color:var(--paper-faint)}
+
+.ed-list{list-style:none;margin:0 auto;padding:0;max-width:760px}
+/* one third of the visible height each, so about three edicts share the screen */
+.edict{
+  --p:1;
+  min-height:calc((100dvh - var(--bar-top)) / 3);
+  display:flex;align-items:center;padding:8px 0;
+}
+.edict-card{
+  position:relative;width:100%;
+  background:var(--ground-2);border:1px solid var(--frame);border-radius:3px;
+  padding:20px 20px 22px;
+  opacity:calc(.1 + .9 * var(--p));
+  transform:scale(calc(.9 + .1 * var(--p)));
+  clip-path:inset(calc((1 - var(--p)) * 22%) calc((1 - var(--p)) * 4%) round 3px);
+  will-change:transform,opacity,clip-path;
+}
+.edict-num{
+  display:block;font-family:"Bodoni Moda",Didot,serif;font-weight:400;
+  font-size:clamp(38px,10vw,56px);line-height:1;letter-spacing:.01em;
+  color:var(--numeral);font-variant-numeric:lining-nums tabular-nums;
+}
+.edict-tag{
+  display:block;margin-top:14px;font-size:12.5px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.13em;color:var(--rose);
+}
+.edict-rule{
+  width:calc(44px * var(--p));height:2px;background:var(--rose);margin:10px 0 14px;
+}
+.edict-text{
+  margin:0;color:var(--paper);font-family:"Bodoni Moda",serif;font-weight:500;
+  font-size:clamp(20px,5.4vw,26px);line-height:1.35;letter-spacing:-.004em;
+  transform:translateY(calc((1 - var(--p)) * 14px));
+}
+.ed-end{max-width:760px;margin:0 auto;padding:40px 0 20px;display:flex;justify-content:center}
+.ed-end button{appearance:none;cursor:pointer;min-height:52px;padding:0 22px;border-radius:3px;
+  font-size:13px;text-transform:uppercase;letter-spacing:.11em;font-weight:600}
+
+@media (min-width:860px){
+  .ed-scroll{padding-inline:40px}
+  .edict-card{padding:28px 34px 30px}
+  .ed-intro p{font-size:19.5px}
+}
+
 @media (prefers-reduced-motion:reduce){
+  .edict{--p:1 !important}
   .track{transition:none}
   .sheet,.scrim{animation:none}
 }
