@@ -481,6 +481,7 @@ button{font-family:inherit}
   font-weight:600;font-size:clamp(19px,4.8vw,24px);line-height:1.45;letter-spacing:-.005em;
   transform:translateY(calc((1 - var(--p)) * 14px));
 }
+.edict-text em{font-style:italic;font-weight:inherit}
 .ed-end{padding:40px 0 20px;display:flex;justify-content:center}
 .ed-end button{appearance:none;cursor:pointer;min-height:52px;padding:0 22px;border-radius:3px;
   font-size:13px;text-transform:uppercase;letter-spacing:.11em;font-weight:600}
