@@ -125,6 +125,114 @@
     {kind:"credits", short:"Credits"}
   ];
 
+  /* ------------------------------------------------------------
+     The Edicts, from "List of Edicts, FINAL 17 August", sorted by
+     date. Each entry is [date, text]; the date is written out from the
+     list's DD/MM/YY. Where the list names a law instead of a date, that
+     name stands in its place in square brackets, and the entry stays
+     directly after the dated edict it followed in the list.
+     ------------------------------------------------------------ */
+  var EDICTS = [
+    ["25 August 2021", "Women told to remain home as soldiers lack training in respect"],
+    ["30 August 2021", "Co-education banned; men barred from teaching women students"],
+    ["8 September 2021", "Protests banned unless they get prior Taliban approval"],
+    ["12 September 2021", "Girls banned from secondary education in Afghanistan"],
+    ["17 September 2021", "Ministry of Women's Affairs replaced by Ministry Virtue & Vice"],
+    ["20 September 2021", "Employed women told to remain home until further notice"],
+    ["29 September 2021", "Women barred from studying & teaching at Kabul University"],
+    ["22 November 2021", "Women banned from appearing in TV drama programmes"],
+    ["26 December 2021", "Women barred from long road trips without a mahram"],
+    ["26 December 2021", "Drivers barred from carrying women without hijab or playing music"],
+    ["29 December 2021", "Public baths closed to women in Balkh"],
+    ["7 January 2022", "Cafés in Herat told not to serve women without a mahram"],
+    ["February 2022", "Universities ordered to enforce gender-segregated classes"],
+    ["2 March 2022", "Women barred from healthcare centres without a mahram"],
+    ["13 March 2022", "All offices ordered to enforce strict separation of women & men"],
+    ["24 March 2022", "Taliban announce secondary schools remain shut for girls"],
+    ["27 March 2022", "Women cannot travel abroad without a mahram or valid reason"],
+    ["6 April 2022", "Parks ordered to introduce gender-segregated visiting days"],
+    ["29 April 2022", "Universities segregate campus access: 3 days for each gender"],
+    ["5 May 2022", "Women barred from obtaining new driving licences"],
+    ["7 May 2022", "Women told to wear burqas in public or remain at home"],
+    ["16 May 2022", "Afghanistan Independent Human Rights Commission dissolved"],
+    ["19 May 2022", "Women TV presenters ordered to cover their faces on screen"],
+    ["29 May 2022", "Women barred from using public transport without a mahram"],
+    ["10 August 2022", "Women flight attendants removed from their jobs"],
+    ["25 August 2022", "Women barred from parks that do not enforce gender segregation"],
+    ["29 August 2022", "Women university students ordered to cover faces in classes"],
+    ["20 September 2022", "Women students banned from taking photos & videos on campus"],
+    ["26 September 2022", "Media ordered to enforce face coverings for women TV guests"],
+    ["7 October 2022", "Women can’t study agriculture, mining, engineering & journalism"],
+    ["28 October 2022", "The Commission of Media Violations removes women"],
+    ["6 November 2022", "Public baths closed to all women in Badghis"],
+    ["10 November 2022", "Women banned from all public parks & gyms"],
+    ["20 December 2022", "Women students banned from public & private universities"],
+    ["22 December 2022", "Girls above grade six barred from all private learning courses"],
+    ["24 December 2022", "Women banned from working for national/international NGOs"],
+    ["27 December 2022", "All women-run bakeries banned in Kabul"],
+    ["11 January 2023", "Women in Herat banned from visiting historic sites"],
+    ["16 January 2023", "Travel agents told not to sell tickets to women without mahram"],
+    ["21 January 2023", "Women barred from taking entry exams for higher education"],
+    ["25 January 2023", "Contraceptives declared haram; pharmacies told not to sell them"],
+    ["1 February 2023", "Kabul hospitals require women staff to wear black hijabs & masks"],
+    ["1 February 2023", "Women medical staff in Kandahar told to bring a mahram to work"],
+    ["6 March 2023", "Women barred from admission to higher education institutes"],
+    ["10 March 2023", "Shrines in Herat ordered to be gender-segregated"],
+    ["12 March 2023", "Women graduates barred from receiving their transcripts"],
+    ["15 March 2023", "Restaurants in Takhar barred from serving women without a mahram"],
+    ["25 March 2023", "Banks in Balkh ordered to segregate services for men & women"],
+    ["4 April 2023", "Afghan women working for UN barred from their workplaces"],
+    ["5 April 2023", "Women banned from going to restaurants in Herat"],
+    ["4 May 2023", "Women of all ages barred from health centres in Kandahar"],
+    ["5 May 2023", "Women barred from visiting cemeteries in Kandahar"],
+    ["11 May 2023", "Media barred from covering women’s hygiene issues"],
+    ["15 June 2023", "Grooms banned from sitting next to brides in wedding halls"],
+    ["17 June 2023", "Women barred from radio & TV shows hosted by male presenters"],
+    ["24 June 2023", "Women-owned beauty parlours ordered to close"],
+    ["26 August 2023", "Women banned from visiting Band-e Amir National Park"],
+    ["16 September 2023", "Shops in Bamyan warned not to sell women’s party dresses"],
+    ["September 2023", "Women in Uruzgan barred from working remotely for NGOs"],
+    ["20 October 2023", "NGOs in Kabul ordered to remove women from leadership roles"],
+    ["25 October 2023", "Wedding videographers in Faryab banned from hiring women"],
+    ["15 November 2023", "Women artists barred from exhibiting images of human faces in Kabul"],
+    ["22 November 2023", "Male tailors banned from tailoring women's clothes in Herat"],
+    ["3 December 2023", "Hospitals in Takhar & Parwan told to remove posters with women"],
+    ["22 February 2024", "Girls aged 10+ barred from attending primary school in Kandahar"],
+    ["22 February 2024", "Girls in grades 4–6 told to cover their faces on the way to school"],
+    ["25 February 2024", "Women in Khost barred from contacting local radio & TV channels"],
+    ["28 February 2024", "Women TV presenters told to wear black hijabs, leaving only eyes visible"],
+    ["17 March 2024", "Women in Nangarhar barred from working in carpet factories"],
+    ["24 March 2024", "Public stoning of women starts being enforced"],
+    ["31 March 2024", "Centres teaching girls beyond grade 6 are closed in Kabul"],
+    ["April 2024", "Women permitted to work ordered to obtain a work permit"],
+    ["26 May 2024", "Couples in Herat must show marriage papers to eat in restaurants"],
+    ["10 June 2024", "Women employees’ salaries cut to 5,000 AFN (around $70/mn)"],
+    ["3 July 2024", "Women in Daikundi told to observe hijab or face jail"],
+    ["10 July 2024", "Propagation of Virtue & Prevention of Vice Law (PVPV) enacted"],
+    ["[PVPV Law]", "Women must cover their entire bodies"],
+    ["[PVPV Law]", "Women should conceal faces to prevent temptation"],
+    ["[PVPV Law]", "Women must conceal voices in songs, hymns & all recitals"],
+    ["[PVPV Law]", "Women's clothing must not be thin, short, tight, or sheer"],
+    ["[PVPV Law]", "Women must hide body and face from men who are not mahram"],
+    ["[PVPV Law]", "Women ordered to cover up in front of non-believing & “loose” women"],
+    ["[PVPV Law]", "Unrelated men & women banned from looking at each other"],
+    ["[PVPV Law]", "Women in public must hide their voice, face & body around men"],
+    ["[PVPV Law]", "Commercial vehicles barred from carrying women without hijabs"],
+    ["[PVPV Law]", "Commercial vehicles can't carry women without male relatives"],
+    ["[Penal Code]", "Wife faces 3 months in jail for visiting family without husband’s consent"],
+    ["[Penal Code]", "Domestic abuse is legitimized as \"discipline\""],
+    ["2 December 2024", "Women barred from medical studies at all public universities"],
+    ["11 December 2024", "Women university staff fired; male relatives offered posts"],
+    ["28 December 2024", "Homes ordered to cover windows so women are not visible"],
+    ["24 May 2025", "Women no longer allowed to drive"],
+    ["29 August 2025", "Women ordered to close beauty salons or face immediate arrest"],
+    ["7 September 2025", "UN Afghan female staff banned from entering UN premises"],
+    ["23 January 2026", "Women denied divorce for abuse, coercion or prolonged abandonment"],
+    ["11 April 2026", "Women without hijab are barred from offices, hospitals, markets"],
+    ["July 2026", "Shops ordered to remove all merchandise depicting women"],
+    ["[Decree No. 18]", "Child marriage permitted without requirement for consent"]
+  ].map(function(e){ return {date:e[0], text:e[1]}; });
+
   function kicker(c){ return "Photograph " + c.n; }
 
   /* Which room each photograph hangs in: photographs 01-09 are the
@@ -396,13 +504,85 @@
     closeSheet();
     stopAudio();
     reader.hidden = true;
+    edicts.hidden = true;
     entry.hidden = false;
     entry.scrollTop = 0;
   }
 
+  /* ---------------- the edicts ---------------- */
+  var edicts=document.getElementById("edicts"),
+      edScroll=document.getElementById("ed-scroll"),
+      edList=document.getElementById("ed-list"),
+      edCur=document.getElementById("ed-cur"),
+      edRows=[], edTops=[], edFrame=0;
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  function pad3(n){ return ("00"+n).slice(-3); }
+  /* house rule from the edicts list: "mahram" is always set in italics */
+  function mahram(html){ return html.replace(/\bmahram\b/gi, "<em>$&</em>"); }
+
+  function renderEdicts(){
+    if(edRows.length) return;
+    edList.innerHTML = EDICTS.map(function(ed,k){
+      return '<li class="edict"><article class="edict-card">'+
+        '<div class="edict-meta">'+
+          '<span class="edict-num" aria-label="Edict '+(k+1)+'">'+pad3(k+1)+'</span>'+
+          '<span class="edict-date">'+esc(ed.date)+'</span>'+
+        '</div>'+
+        '<div class="edict-rule" aria-hidden="true"></div>'+
+        '<p class="edict-text">'+mahram(esc(ed.text))+'</p>'+
+      '</article></li>';
+    }).join("");
+    document.getElementById("ed-tot").textContent = pad3(EDICTS.length);
+    edRows = Array.prototype.slice.call(edList.children);
+  }
+
+  /* Row positions only move on resize, never on scroll, since the
+     animation is all transforms. Measure once, then scrolling is
+     arithmetic against scrollTop. */
+  function measureEdicts(){
+    /* .ed-scroll is positioned, so it is each row's offsetParent */
+    edTops = edRows.map(function(r){ return r.offsetTop + r.offsetHeight/2; });
+    paintEdicts();
+  }
+
+  function paintEdicts(){
+    edFrame = 0;
+    var h = edScroll.clientHeight, mid = edScroll.scrollTop + h/2,
+        reach = h*0.62, best = 0, bestD = Infinity;
+    for(var k=0; k<edRows.length; k++){
+      var d = Math.abs(edTops[k] - mid);
+      if(d < bestD){ bestD = d; best = k; }
+      if(reduceMotion && reduceMotion.matches) continue;
+      var t = Math.max(0, 1 - d/reach);
+      var p = t*t*(3 - 2*t);            // smoothstep: eases in and out
+      edRows[k].style.setProperty("--p", p.toFixed(3));
+    }
+    edCur.textContent = pad3(best+1);
+  }
+
+  edScroll.addEventListener("scroll", function(){
+    if(!edFrame) edFrame = requestAnimationFrame(paintEdicts);
+  }, {passive:true});
+  window.addEventListener("resize", function(){ if(!edicts.hidden) measureEdicts(); });
+
+  function openEdicts(){
+    entry.hidden = true;
+    reader.hidden = true;
+    edicts.hidden = false;
+    renderEdicts();
+    edScroll.scrollTop = 0;
+    measureEdicts();
+    capture("edicts_opened", {});
+  }
+
   document.querySelectorAll(".choice").forEach(function(b){
-    b.addEventListener("click", function(){ openReader(b.dataset.go); });
+    b.addEventListener("click", function(){
+      if(b.dataset.go==="edicts") openEdicts(); else openReader(b.dataset.go);
+    });
   });
+  document.getElementById("edicts-home").addEventListener("click", openEntry);
+  document.getElementById("edicts-back").addEventListener("click", openEntry);
   home.addEventListener("click", openEntry);
   dA.addEventListener("click", function(){ setDeck("a", 0, "deck_control"); });
   dB.addEventListener("click", function(){ setDeck("b", 0, "deck_control"); });
@@ -499,7 +679,7 @@
     if(e.metaKey||e.ctrlKey||e.altKey) return;
     if(e.key==="Escape"){
       if(sheetEls){ e.preventDefault(); closeSheet(); }
-      else if(!reader.hidden){ e.preventDefault(); openEntry(); }
+      else if(!reader.hidden || !edicts.hidden){ e.preventDefault(); openEntry(); }
       return;
     }
     if(sheetEls || reader.hidden) return;

@@ -14,6 +14,9 @@
   --paper-faint:#8E9199;
   --crimson:#C8433D;
   --crimson-lit:#EE7068;
+  --rose:#E09AA0;
+  /* the edict numerals: present but barely, a watermark rather than a label */
+  --numeral:#5E626C;
 
   --bar-top:58px;
   --bar-bot:calc(70px + env(safe-area-inset-bottom, 0px));
@@ -109,9 +112,11 @@ button{font-family:inherit}
   #entry{padding:40px}
   .entry-inner{max-width:900px;gap:32px}
   .entry-conc{font-size:19.5px;max-width:34em;margin-inline:auto}
-  .choices{flex-direction:row}
-  /* min-width:0 or the flex item refuses to shrink below its content */
-  .choice{flex:1;min-width:0}
+  .choices{flex-direction:row;flex-wrap:wrap}
+  /* min-width:0 or the flex item refuses to shrink below its content.
+     Basis 0 keeps the two half cards on one line; the wide card wraps. */
+  .choice{flex:1 1 0;min-width:0}
+  .choice.choice-wide{flex-basis:100%}
 }
 
 /* ============================================================
@@ -410,7 +415,84 @@ button{font-family:inherit}
   @keyframes pop{from{transform:translate(-50%,-47%);opacity:0}to{transform:translate(-50%,-50%);opacity:1}}
   .grab{display:none}
 }
+/* ============================================================
+   6. THE EDICTS
+   A long vertical scroll. Each edict eases open as it nears the
+   middle of the screen and folds away again as it leaves, in
+   both directions. js/app.js writes --p (0 to 1) on every row.
+   ============================================================ */
+#edicts{position:fixed;inset:0;z-index:50;background:var(--ground)}
+.ed-count{font-size:14px;font-weight:500;letter-spacing:.06em;color:var(--paper-faint);
+  font-variant-numeric:tabular-nums;white-space:nowrap;flex:none}
+.ed-count b{color:var(--paper);font-weight:700}
+.ed-scroll{
+  position:absolute;top:var(--bar-top);bottom:0;left:0;right:0;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+  padding:0 20px calc(40px + env(safe-area-inset-bottom,0px));
+}
+.ed-intro{
+  max-width:34em;margin:0;min-height:calc(100dvh - var(--bar-top));
+  display:flex;flex-direction:column;justify-content:center;padding:40px 0;
+}
+.ed-intro .eyebrow{color:var(--crimson-lit);margin-bottom:10px}
+.ed-intro h2{
+  font-family:"Bodoni Moda",Didot,serif;font-weight:600;
+  font-size:clamp(42px,12vw,74px);line-height:.98;letter-spacing:-.015em;margin:0 0 18px;
+}
+.ed-intro p{margin:0;color:var(--paper-dim);font-size:18px;line-height:1.65}
+.ed-hint{margin-top:34px;font-size:12px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.13em;color:var(--paper-faint)}
+
+.ed-list{list-style:none;margin:0;padding:0}
+/* rows take their content's height, so the gap either side of a divider
+   is only this padding and never a stretch of empty screen */
+.edict{--p:1;position:relative;padding:36px 0}
+/* the divider between edicts: 80% wide, centred, barely there */
+.edict + .edict::before{
+  content:"";position:absolute;top:0;left:10%;width:80%;height:1px;
+  background:var(--frame);
+}
+.edict-card{
+  position:relative;width:100%;
+  opacity:calc(.1 + .9 * var(--p));
+  transform:scale(calc(.94 + .06 * var(--p)));
+  transform-origin:left center;
+  will-change:transform,opacity;
+}
+/* number and date share one quiet line above the edict, so the words
+   carry the row and the numeral no longer competes with them */
+.edict-meta{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.edict-num{
+  font-family:"Open Sans",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  font-weight:600;font-size:15px;line-height:1;letter-spacing:.06em;
+  color:var(--numeral);font-variant-numeric:lining-nums tabular-nums;
+}
+.edict-date{
+  font-size:12.5px;font-weight:600;line-height:1;
+  text-transform:uppercase;letter-spacing:.13em;color:var(--rose);
+  font-variant-numeric:tabular-nums;
+}
+.edict-rule{
+  width:calc(44px * var(--p));height:2px;background:var(--rose);margin:12px 0 14px;
+}
+.edict-text{
+  margin:0;color:var(--paper);
+  font-family:"Open Sans",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  font-weight:600;font-size:clamp(19px,4.8vw,24px);line-height:1.45;letter-spacing:-.005em;
+  transform:translateY(calc((1 - var(--p)) * 14px));
+}
+.edict-text em{font-style:italic;font-weight:inherit}
+.ed-end{padding:40px 0 20px;display:flex;justify-content:center}
+.ed-end button{appearance:none;cursor:pointer;min-height:52px;padding:0 22px;border-radius:3px;
+  font-size:13px;text-transform:uppercase;letter-spacing:.11em;font-weight:600}
+
+@media (min-width:860px){
+  .ed-scroll{padding-inline:clamp(40px,6vw,96px)}
+  .ed-intro p{font-size:19.5px}
+}
+
 @media (prefers-reduced-motion:reduce){
+  .edict{--p:1 !important}
   .track{transition:none}
   .sheet,.scrim{animation:none}
 }
