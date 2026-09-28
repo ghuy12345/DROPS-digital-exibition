@@ -126,11 +126,11 @@
   ];
 
   /* ------------------------------------------------------------
-     The Edicts, in the order of "List of Edicts, FINAL 17 August".
-     Each entry is [date, text];
-     the date is written out from the list's DD/MM/YY. Where the list
-     names a law instead of a date, that name stands in its place, in
-     brackets.
+     The Edicts, from "List of Edicts, FINAL 17 August", sorted by
+     date. Each entry is [date, text]; the date is written out from the
+     list's DD/MM/YY. Where the list names a law instead of a date, that
+     name stands in its place in square brackets, and the entry stays
+     directly after the dated edict it followed in the list.
      ------------------------------------------------------------ */
   var EDICTS = [
     ["25 August 2021", "Women told to remain home as soldiers lack training in respect"],
@@ -192,8 +192,8 @@
     ["26 August 2023", "Women banned from visiting Band-e Amir National Park"],
     ["16 September 2023", "Shops in Bamyan warned not to sell women’s party dresses"],
     ["September 2023", "Women in Uruzgan barred from working remotely for NGOs"],
-    ["25 October 2023", "Wedding videographers in Faryab banned from hiring women"],
     ["20 October 2023", "NGOs in Kabul ordered to remove women from leadership roles"],
+    ["25 October 2023", "Wedding videographers in Faryab banned from hiring women"],
     ["15 November 2023", "Women artists barred from exhibiting images of human faces in Kabul"],
     ["22 November 2023", "Male tailors banned from tailoring women's clothes in Herat"],
     ["3 December 2023", "Hospitals in Takhar & Parwan told to remove posters with women"],
@@ -209,28 +209,28 @@
     ["10 June 2024", "Women employees’ salaries cut to 5,000 AFN (around $70/mn)"],
     ["3 July 2024", "Women in Daikundi told to observe hijab or face jail"],
     ["10 July 2024", "Propagation of Virtue & Prevention of Vice Law (PVPV) enacted"],
-    ["(PVPV Law)", "Women must cover their entire bodies"],
-    ["(PVPV Law)", "Women should conceal faces to prevent temptation"],
-    ["(PVPV Law)", "Women must conceal voices in songs, hymns & all recitals"],
-    ["(PVPV Law)", "Women's clothing must not be thin, short, tight, or sheer"],
-    ["(PVPV Law)", "Women must hide body and face from men who are not mahram"],
-    ["(PVPV Law)", "Women ordered to cover up in front of non-believing & “loose” women"],
-    ["(PVPV Law)", "Unrelated men & women banned from looking at each other"],
-    ["(PVPV Law)", "Women in public must hide their voice, face & body around men"],
-    ["(PVPV Law)", "Commercial vehicles barred from carrying women without hijabs"],
-    ["(PVPV Law)", "Commercial vehicles can't carry women without male relatives"],
-    ["(Penal Code)", "Wife faces 3 months in jail for visiting family without husband’s consent"],
-    ["(Penal Code)", "Domestic abuse is legitimized as \"discipline\""],
-    ["23 January 2026", "Women denied divorce for abuse, coercion or prolonged abandonment"],
-    ["4 November 2026", "Women without hijab are barred from offices, hospitals, markets"],
+    ["[PVPV Law]", "Women must cover their entire bodies"],
+    ["[PVPV Law]", "Women should conceal faces to prevent temptation"],
+    ["[PVPV Law]", "Women must conceal voices in songs, hymns & all recitals"],
+    ["[PVPV Law]", "Women's clothing must not be thin, short, tight, or sheer"],
+    ["[PVPV Law]", "Women must hide body and face from men who are not mahram"],
+    ["[PVPV Law]", "Women ordered to cover up in front of non-believing & “loose” women"],
+    ["[PVPV Law]", "Unrelated men & women banned from looking at each other"],
+    ["[PVPV Law]", "Women in public must hide their voice, face & body around men"],
+    ["[PVPV Law]", "Commercial vehicles barred from carrying women without hijabs"],
+    ["[PVPV Law]", "Commercial vehicles can't carry women without male relatives"],
+    ["[Penal Code]", "Wife faces 3 months in jail for visiting family without husband’s consent"],
+    ["[Penal Code]", "Domestic abuse is legitimized as \"discipline\""],
     ["2 December 2024", "Women barred from medical studies at all public universities"],
-    ["7 September 2025", "UN Afghan female staff banned from entering UN premises"],
-    ["29 August 2025", "Women ordered to close beauty salons or face immediate arrest"],
-    ["24 May 2025", "Women no longer allowed to drive"],
-    ["28 December 2024", "Homes ordered to cover windows so women are not visible"],
     ["11 December 2024", "Women university staff fired; male relatives offered posts"],
+    ["28 December 2024", "Homes ordered to cover windows so women are not visible"],
+    ["24 May 2025", "Women no longer allowed to drive"],
+    ["29 August 2025", "Women ordered to close beauty salons or face immediate arrest"],
+    ["7 September 2025", "UN Afghan female staff banned from entering UN premises"],
+    ["23 January 2026", "Women denied divorce for abuse, coercion or prolonged abandonment"],
+    ["11 April 2026", "Women without hijab are barred from offices, hospitals, markets"],
     ["July 2026", "Shops ordered to remove all merchandise depicting women"],
-    ["(Decree No. 18)", "Child marriage permitted without requirement for consent"]
+    ["[Decree No. 18]", "Child marriage permitted without requirement for consent"]
   ].map(function(e){ return {date:e[0], text:e[1]}; });
 
   function kicker(c){ return "Photograph " + c.n; }
