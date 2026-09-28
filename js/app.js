@@ -425,8 +425,10 @@
     if(edRows.length) return;
     edList.innerHTML = EDICTS.map(function(ed,k){
       return '<li class="edict"><article class="edict-card">'+
-        '<span class="edict-num" aria-label="Edict '+(k+1)+'">'+pad3(k+1)+'</span>'+
-        '<span class="edict-date">'+esc(ed.date)+'</span>'+
+        '<div class="edict-meta">'+
+          '<span class="edict-num" aria-label="Edict '+(k+1)+'">'+pad3(k+1)+'</span>'+
+          '<span class="edict-date">'+esc(ed.date)+'</span>'+
+        '</div>'+
         '<div class="edict-rule" aria-hidden="true"></div>'+
         '<p class="edict-text">'+esc(ed.text)+'</p>'+
       '</article></li>';
