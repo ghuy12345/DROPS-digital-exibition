@@ -431,7 +431,7 @@ button{font-family:inherit}
   padding:0 20px calc(40px + env(safe-area-inset-bottom,0px));
 }
 .ed-intro{
-  max-width:34em;margin:0 auto;min-height:calc(100dvh - var(--bar-top));
+  max-width:34em;margin:0;min-height:calc(100dvh - var(--bar-top));
   display:flex;flex-direction:column;justify-content:center;padding:40px 0;
 }
 .ed-intro .eyebrow{color:var(--crimson-lit);margin-bottom:10px}
@@ -443,20 +443,23 @@ button{font-family:inherit}
 .ed-hint{margin-top:34px;font-size:12px;font-weight:600;text-transform:uppercase;
   letter-spacing:.13em;color:var(--paper-faint)}
 
-.ed-list{list-style:none;margin:0 auto;padding:0;max-width:760px}
+.ed-list{list-style:none;margin:0;padding:0}
 /* one third of the visible height each, so about three edicts share the screen */
 .edict{
-  --p:1;
+  --p:1;position:relative;
   min-height:calc((100dvh - var(--bar-top)) / 3);
-  display:flex;align-items:center;padding:8px 0;
+  display:flex;align-items:center;padding:28px 0;
+}
+/* the divider between edicts: 80% wide, centred, barely there */
+.edict + .edict::before{
+  content:"";position:absolute;top:0;left:10%;width:80%;height:1px;
+  background:var(--frame);
 }
 .edict-card{
   position:relative;width:100%;
-  background:var(--ground-2);border:1px solid var(--frame);border-radius:3px;
-  padding:20px 20px 22px;
   opacity:calc(.1 + .9 * var(--p));
-  transform:scale(calc(.9 + .1 * var(--p)));
-  clip-path:inset(calc((1 - var(--p)) * 22%) calc((1 - var(--p)) * 4%) round 3px);
+  transform:scale(calc(.94 + .06 * var(--p)));
+  clip-path:inset(calc((1 - var(--p)) * 22%) 0);
   will-change:transform,opacity,clip-path;
 }
 .edict-num{
@@ -464,25 +467,25 @@ button{font-family:inherit}
   font-size:clamp(38px,10vw,56px);line-height:1;letter-spacing:.01em;
   color:var(--numeral);font-variant-numeric:lining-nums tabular-nums;
 }
-.edict-tag{
+.edict-date{
   display:block;margin-top:14px;font-size:12.5px;font-weight:600;
   text-transform:uppercase;letter-spacing:.13em;color:var(--rose);
+  font-variant-numeric:tabular-nums;
 }
 .edict-rule{
   width:calc(44px * var(--p));height:2px;background:var(--rose);margin:10px 0 14px;
 }
 .edict-text{
   margin:0;color:var(--paper);font-family:"Bodoni Moda",serif;font-weight:500;
-  font-size:clamp(20px,5.4vw,26px);line-height:1.35;letter-spacing:-.004em;
+  font-size:clamp(20px,5.4vw,30px);line-height:1.35;letter-spacing:-.004em;
   transform:translateY(calc((1 - var(--p)) * 14px));
 }
-.ed-end{max-width:760px;margin:0 auto;padding:40px 0 20px;display:flex;justify-content:center}
+.ed-end{padding:40px 0 20px;display:flex;justify-content:center}
 .ed-end button{appearance:none;cursor:pointer;min-height:52px;padding:0 22px;border-radius:3px;
   font-size:13px;text-transform:uppercase;letter-spacing:.11em;font-weight:600}
 
 @media (min-width:860px){
-  .ed-scroll{padding-inline:40px}
-  .edict-card{padding:28px 34px 30px}
+  .ed-scroll{padding-inline:clamp(40px,6vw,96px)}
   .ed-intro p{font-size:19.5px}
 }
 

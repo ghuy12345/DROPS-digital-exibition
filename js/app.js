@@ -131,7 +131,8 @@
      ------------------------------------------------------------ */
   var EDICTS = [];
   for(var e=1; e<=100; e++){
-    EDICTS.push({text:"Placeholder for edict "+e+". The wording of this measure will appear here."});
+    EDICTS.push({date:"DD Month YYYY",
+      text:"Placeholder for edict "+e+". The wording of this measure will appear here."});
   }
 
   function kicker(c){ return "Photograph " + c.n; }
@@ -425,7 +426,7 @@
     edList.innerHTML = EDICTS.map(function(ed,k){
       return '<li class="edict"><article class="edict-card">'+
         '<span class="edict-num" aria-label="Edict '+(k+1)+'">'+pad3(k+1)+'</span>'+
-        '<span class="edict-tag">Edict</span>'+
+        '<span class="edict-date">'+esc(ed.date)+'</span>'+
         '<div class="edict-rule" aria-hidden="true"></div>'+
         '<p class="edict-text">'+esc(ed.text)+'</p>'+
       '</article></li>';
