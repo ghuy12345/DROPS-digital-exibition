@@ -444,12 +444,9 @@ button{font-family:inherit}
   letter-spacing:.13em;color:var(--paper-faint)}
 
 .ed-list{list-style:none;margin:0;padding:0}
-/* one third of the visible height each, so about three edicts share the screen */
-.edict{
-  --p:1;position:relative;
-  min-height:calc((100dvh - var(--bar-top)) / 3);
-  display:flex;align-items:center;padding:28px 0;
-}
+/* rows take their content's height, so the gap either side of a divider
+   is only this padding and never a stretch of empty screen */
+.edict{--p:1;position:relative;padding:36px 0}
 /* the divider between edicts: 80% wide, centred, barely there */
 .edict + .edict::before{
   content:"";position:absolute;top:0;left:10%;width:80%;height:1px;
@@ -459,8 +456,8 @@ button{font-family:inherit}
   position:relative;width:100%;
   opacity:calc(.1 + .9 * var(--p));
   transform:scale(calc(.94 + .06 * var(--p)));
-  clip-path:inset(calc((1 - var(--p)) * 22%) 0);
-  will-change:transform,opacity,clip-path;
+  transform-origin:left center;
+  will-change:transform,opacity;
 }
 .edict-num{
   display:block;font-family:"Bodoni Moda",Didot,serif;font-weight:400;
