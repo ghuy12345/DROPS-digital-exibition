@@ -126,13 +126,14 @@
   ];
 
   /* ------------------------------------------------------------
-     The Edicts, in the order of the list supplied in September 2026
-     ("List of Edicts, missing ones, Sept 3"). Each entry is [date, text];
+     The Edicts, in the order of "List of Edicts, FINAL 17 August".
+     Each entry is [date, text];
      the date is written out from the list's DD/MM/YY. Where the list
-     names a law instead of a date, that name stands in its place.
+     names a law instead of a date, that name stands in its place, in
+     brackets.
      ------------------------------------------------------------ */
   var EDICTS = [
-    ["25 August 2021", "Women told remain home as soldiers lack training in respect"],
+    ["25 August 2021", "Women told to remain home as soldiers lack training in respect"],
     ["30 August 2021", "Co-education banned; men barred from teaching women students"],
     ["8 September 2021", "Protests banned unless they get prior Taliban approval"],
     ["12 September 2021", "Girls banned from secondary education in Afghanistan"],
@@ -208,18 +209,18 @@
     ["10 June 2024", "Women employees’ salaries cut to 5,000 AFN (around $70/mn)"],
     ["3 July 2024", "Women in Daikundi told to observe hijab or face jail"],
     ["10 July 2024", "Propagation of Virtue & Prevention of Vice Law (PVPV) enacted"],
-    ["PVPV Law", "Women must cover their entire bodies"],
-    ["PVPV Law", "Women should conceal faces to prevent temptation"],
-    ["PVPV Law", "Women must conceal voices in songs, hymns & all recitals"],
-    ["PVPV Law", "Women's clothing must not be thin, short, tight, or sheer"],
-    ["PVPV Law", "Women must hide body and face from men who are not mahram"],
-    ["PVPV Law", "Women ordered to cover up in front of non-believing & “loose” women"],
-    ["PVPV Law", "Unrelated men & women banned from looking at each other"],
-    ["PVPV Law", "Women in public must hide their voice, face & body around men"],
-    ["PVPV Law", "Commercial vehicles barred from carrying women without hijabs"],
-    ["PVPV Law", "Commercial vehicles can't carry women without male relatives"],
-    ["Penal Code", "Wife faces 3 months in jail for visiting family without husband’s consent"],
-    ["Penal Code", "Domestic abuse is legitimized as \"discipline\""],
+    ["(PVPV Law)", "Women must cover their entire bodies"],
+    ["(PVPV Law)", "Women should conceal faces to prevent temptation"],
+    ["(PVPV Law)", "Women must conceal voices in songs, hymns & all recitals"],
+    ["(PVPV Law)", "Women's clothing must not be thin, short, tight, or sheer"],
+    ["(PVPV Law)", "Women must hide body and face from men who are not mahram"],
+    ["(PVPV Law)", "Women ordered to cover up in front of non-believing & “loose” women"],
+    ["(PVPV Law)", "Unrelated men & women banned from looking at each other"],
+    ["(PVPV Law)", "Women in public must hide their voice, face & body around men"],
+    ["(PVPV Law)", "Commercial vehicles barred from carrying women without hijabs"],
+    ["(PVPV Law)", "Commercial vehicles can't carry women without male relatives"],
+    ["(Penal Code)", "Wife faces 3 months in jail for visiting family without husband’s consent"],
+    ["(Penal Code)", "Domestic abuse is legitimized as \"discipline\""],
     ["23 January 2026", "Women denied divorce for abuse, coercion or prolonged abandonment"],
     ["4 November 2026", "Women without hijab are barred from offices, hospitals, markets"],
     ["2 December 2024", "Women barred from medical studies at all public universities"],
@@ -229,7 +230,7 @@
     ["28 December 2024", "Homes ordered to cover windows so women are not visible"],
     ["11 December 2024", "Women university staff fired; male relatives offered posts"],
     ["July 2026", "Shops ordered to remove all merchandise depicting women"],
-    ["Decree No. 18", "Child marriage permitted without requirement for consent"]
+    ["(Decree No. 18)", "Child marriage permitted without requirement for consent"]
   ].map(function(e){ return {date:e[0], text:e[1]}; });
 
   function kicker(c){ return "Photograph " + c.n; }
