@@ -505,6 +505,7 @@
     stopAudio();
     reader.hidden = true;
     edicts.hidden = true;
+    cta.hidden = true;
     entry.hidden = false;
     entry.scrollTop = 0;
   }
@@ -576,9 +577,24 @@
     capture("edicts_opened", {});
   }
 
+  /* ---------------- call to action ---------------- */
+  var cta=document.getElementById("cta");
+  function openCta(){
+    entry.hidden = true;
+    reader.hidden = true;
+    edicts.hidden = true;
+    cta.hidden = false;
+    document.getElementById("cta-scroll").scrollTop = 0;
+    capture("cta_opened", {});
+  }
+  document.getElementById("cta-home").addEventListener("click", openEntry);
+  document.getElementById("cta-back").addEventListener("click", openEntry);
+
   document.querySelectorAll(".choice").forEach(function(b){
     b.addEventListener("click", function(){
-      if(b.dataset.go==="edicts") openEdicts(); else openReader(b.dataset.go);
+      if(b.dataset.go==="edicts") openEdicts();
+      else if(b.dataset.go==="cta") openCta();
+      else openReader(b.dataset.go);
     });
   });
   document.getElementById("edicts-home").addEventListener("click", openEntry);
@@ -679,7 +695,7 @@
     if(e.metaKey||e.ctrlKey||e.altKey) return;
     if(e.key==="Escape"){
       if(sheetEls){ e.preventDefault(); closeSheet(); }
-      else if(!reader.hidden || !edicts.hidden){ e.preventDefault(); openEntry(); }
+      else if(!reader.hidden || !edicts.hidden || !cta.hidden){ e.preventDefault(); openEntry(); }
       return;
     }
     if(sheetEls || reader.hidden) return;
