@@ -318,7 +318,7 @@
       return '<section class="spread solo"><div class="creditwrap"><div class="creditgrid">'+
         '<section><h4>Exhibition</h4><p><b>Where Justice Lives</b></p></section>'+
         '<section><h4>Venue</h4><p>Nelson Mandela Foundation, Johannesburg</p></section>'+
-        '<section><h4>Dates</h4><p>15 - 26 September 2026</p></section>'+
+        '<section><h4>Dates</h4><p>14 October - 9 November 2026</p></section>'+
         '<section><h4>Presented by</h4><p>Organization for Policy Research and Development Studies (DROPS)<br>ConneXUS Collaborative</p></section>'+
         '<section><h4>Made possible by</h4><p>ODI Global’s partnership with Fondation CHANEL<br>Open Society Foundations</p></section>'+
         '<section><h4>Exhibition Design and Curation</h4><p>Mariam Safi, Rina Amiri, Meha Desai</p></section>'+
